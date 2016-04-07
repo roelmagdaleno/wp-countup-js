@@ -3,7 +3,7 @@
   Plugin Name: WP CountUP JS
   Plugin URI: https://inorganik.github.io/countUp.js/
   Description: You can create a lot of animated numerical counters and display it into your site.
-  Version: 1.0
+  Version: 1.1
   Author: Roel Magdaleno
   Author URI: https://twitter.com/roelmagdaleno
   License: GPLv2
@@ -13,6 +13,7 @@
   * Adding Menu to Settings Menu
   *----------------------------------*/
   add_action( 'admin_menu', 'countup_options_to_settings_menu' );
+
   function countup_options_to_settings_menu(){
     add_options_page( 'CountUp.js Options', 'CountUP.js', 'manage_options', 'countup-js', 'countup_theme' );
   }
@@ -29,8 +30,8 @@
           <?php submit_button(); ?>
         </form>
       </div>
-      <?php
-    }
+    <?php
+  }
 
   /*-----------------------------------
   * CountUp.js Activated & Deactivated
@@ -260,12 +261,18 @@
       'start' => '0',
       'end' => '1000',
       'decimals' => '0',
-      'duration' => '2'
+      'duration' => '2',
+      'easing' => ' ',
+      'grouping' => ' ',
+      'separator' => ' ',
+      'decimal' => ' ',
+      'prefix' => ' ',
+      'suffix' => ' '
     ), $atts );
 
     $settings = array(
-      "easing" => $options['use_easing'],
-      "grouping" => $options['use_grouping'],
+      "useEasing" => $options['use_easing'],
+      "useGrouping" => $options['use_grouping'],
       "separator" => $options['use_separator'],
       "decimal" => $options['use_decimal'],
       "prefix" => $options['use_prefix'],
@@ -277,7 +284,7 @@
     wp_enqueue_script('countupjs_initializer');
 
     //This div contains the end of the counter, it is represented by a data-count.
-    $output = "<div class='counter' data-start='$a[start]' data-count='$a[end]' data-decimals='$a[decimals]' data-duration='$a[duration]'></div>";
+    $output = "<div class='counter' data-start='$a[start]' data-count='$a[end]' data-decimals='$a[decimals]' data-duration='$a[duration]' data-easing='$a[easing]' data-grouping='$a[grouping]' data-separator='$a[separator]' data-decimal='$a[decimal]' data-prefix='$a[prefix]' data-suffix='$a[suffix]'></div>";
 
     //Return Output.
     return $output;
