@@ -3,7 +3,7 @@
   Plugin Name: WP CountUP JS
   Plugin URI: https://inorganik.github.io/countUp.js/
   Description: You can create a lot of animated numerical counters and display it into your site.
-  Version: 1.1
+  Version: 2.1
   Author: Roel Magdaleno
   Author URI: https://twitter.com/roelmagdaleno
   License: GPLv2

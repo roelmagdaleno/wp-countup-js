@@ -2,8 +2,8 @@
 Contributors: Roel Magdaleno
 Tags: wordpress, plugin, counter, countup, countupjs, animated
 Requires at least: 3.5
-Tested up to: 4.4.2
-Stable tag: "trunk"
+Tested up to: 4.5.2
+Stable tag: 2.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,23 @@ Use this plugin, is very easy, you can use it quickly after install it. To do th
 
 [countup start="your-value" end="your-value" decimals="your-value" duration="your-value"]
 
-The shortcode accepts four arguments, as you can see previously:
+** VERSION 2.0 **
+
+Also you can add the options from CountUP.js Options Page inside of the shortcode, like this:
+
+[countup easing="true" groupig="false" separator="," decimal="." prefix="this_prefix" suffix="this_suffix"]
+
+If you don't use these options inside of the shortcode, the default values will be pull from CountUp.js Options Page.
+
+** END VERSION 2.0 **
+
+** VERSION 2.1 **
+
+All counters started their animation before to reach the target counter. Now, when you scrolled to the target counter, the counter will start their animation.
+
+** END VERSION 2.1 **
+
+The shortcode accepts those arguments, as you can see previously:
 
 [countup
   start="your-value" //This use a number to begin the counter.
@@ -36,7 +52,7 @@ The shortcode accepts four arguments, as you can see previously:
   duration="your-value" //This use a number (seconds) as duration of the counter.
 ]
 
-Example: [countup start="0" end="55" decimals="0" duration="5"]
+Example: [countup start="0" end="55" decimals="0" duration="5" prefix="my_prefix"]
 
 Now you know how to use this plugin, but you can edit some options if you required (Go to "Settings"->"CountUP.js").
 
@@ -52,10 +68,21 @@ Now you know how to use this plugin, but you can edit some options if you requir
 1. Screenshot-1: Output counters on the site.
 2. Screenshot-2: Shortcode example.
 3. Screenshot-3: Plugin options page.
+4. Screenshot-4: CountUp.js Options inside shortcode.
+5. Screenshot-5: Output counters on the site with individual prefix and suffix.
 
 == Changelog ==
 
 = 1.0 =
 * Release
+
+= 1.1 =
+* jQuery issue was solved.
+
+= 2.0 =
+* Now you can add the options from CountUP.js Options Page inside of the shortcode. Please check Usage and Options for more information.
+
+= 2.1 =
+* All counters started their animation before to reach the target counter. Now, when you scrolled to the target counter, the counter will start their animation.
 
 == Upgrade Notice ==

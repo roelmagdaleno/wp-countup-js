@@ -1,8 +1,11 @@
 jQuery(document).ready(function($){
+  var eventFired = false;
   var options = {};
 
   //Loop to class counter which contains all data provided into the shortcode.
-  $.each($('.counter'), function(){
+  $.each($('.counter'), function(index, value){
+    $(this).attr('id', 'counter-' + index); //Add an id to each counter.
+
     var start     = $(this).data('start');
     var count     = $(this).data('count');
     var decimals  = $(this).data('decimals');
@@ -33,9 +36,21 @@ jQuery(document).ready(function($){
       }
     });
 
-    var numAnim = new CountUp(this, start, count, decimals, duration, options);
+    //Get counter id.
+    var counterId = $(this).attr('id');
 
-    numAnim.start();
+    //Object Instance.
+    var numAnim = new CountUp(counterId, start, count, decimals, duration, options);
+
+    //Scroll function to execute the animation number when it scrolled to the object.
+    var objectPositionTop = $('#' + counterId).offset().top - window.innerHeight;
+
+    $(window).on('scroll', function(){
+      var currentPosition = $(document).scrollTop();
+
+      if(currentPosition > objectPositionTop && eventFired === false){
+        numAnim.start();
+      }
+    });
   });
-
 });
