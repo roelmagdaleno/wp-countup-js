@@ -1,4 +1,4 @@
-jQuery( document ).ready( function( $ ){
+jQuery( document ).ready( function( $ ) {
 	var eventFired     = false;
 	var options        = {};
 	var counterObjects = {};
@@ -23,7 +23,7 @@ jQuery( document ).ready( function( $ ){
 			// the following shortcode structure: [countup start="0" end="55"].
 			//
 			// Be sure that the previous code run before the next code.
-			var count     = wp_cup_settings.end_inside_shortcode ? $( this ).html() : $( this ).data( 'count' );
+			var count     = WP_CountUp_JS.endInsideShortcode ? $( this ).html() : $( this ).data( 'count' );
 			var start     = $( this ).data( 'start' );
 			var decimals  = $( this ).data( 'decimals' );
 			var duration  = $( this ).data( 'duration' );
@@ -47,8 +47,8 @@ jQuery( document ).ready( function( $ ){
 
 			//Loop to options_in_shortcode, this means if one option value inside of shortcode is empty, the default value is pull from the options page.
 			$.each( options_in_shortcode, function( key, value ){
-				if( value == " " ){
-					options[ key ] = wp_cup_settings.settings[ key ];
+				if ( value == " " ) {
+					options[ key ] = WP_CountUp_JS.pluginSettings[ key ];
 				} else {
 					options[ key ] = value;
 				}
