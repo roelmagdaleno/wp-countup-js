@@ -20,6 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'WP_COUNTUP_JS_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
+ * The plugin dir path.
+ */
+define( 'WP_COUNTUP_JS_URL', plugin_dir_url( __FILE__ ) );
+
+/**
  * Require all the useful classes to make
  * the plugin work.
  *

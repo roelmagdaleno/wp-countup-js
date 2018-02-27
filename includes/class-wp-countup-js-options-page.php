@@ -32,7 +32,7 @@ if ( ! class_exists( 'WP_CountUp_JS_Options_Page' ) ) {
 				'CountUP.js',
 				'manage_options',
 				'countup-js',
-				array( $this, 'render_page' ),
+				array( $this, 'render_page' )
 			);
 		}
 

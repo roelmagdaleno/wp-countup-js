@@ -15,15 +15,29 @@ if ( ! class_exists( 'WP_CountUp_JS_Main' ) ) {
 	 */
 	class WP_CountUp_JS_Main {
 		/**
+		 * The current plugin version.
+		 *
+		 * @since  4.0.0
+		 * @access private
+		 *
+		 * @var    string   $version   The current plugin version.
+		 */
+		private $version;
+
+		/**
 		 * Initialize all plugin functionality.
 		 *
 		 * @since  4.0.0
 		 */
 		public function __construct() {
-			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
+			$this->version = '4.0.0';
 
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			new WP_CountUp_JS_Shortcode();
-			new WP_CountUp_JS_Options_Page();
+
+			if ( is_admin() ) {
+				new WP_CountUp_JS_Options_Page();
+			}
 		}
 
 		/**
@@ -33,6 +47,7 @@ if ( ! class_exists( 'WP_CountUp_JS_Main' ) ) {
 		 * @since  4.0.0
 		 */
 		public function register_scripts() {
+			$options         = get_option( 'countupjs-option-page' );
 			$plugin_settings = array(
 				'useEasing'   => isset( $options['use_easing'] ),
 				'useGrouping' => isset( $options['use_grouping'] ),
@@ -42,15 +57,13 @@ if ( ! class_exists( 'WP_CountUp_JS_Main' ) ) {
 				'suffix'      => $options['use_sufix'],
 			);
 
-			wp_register_script( 'wp-countup-js-core', WP_COUNTUP_JS_PATH . 'public/js/countUp.js', array( 'jquery' ) );
-			wp_enqueue_script( 'wp-countup-js-core' );
-
-			wp_register_script( 'wp-countup-js-plugin', WP_COUNTUP_JS_PATH . 'public/js/showCounter.js', array( 'jquery' ) );
-			wp_enqueue_script( 'wp-countup-js-plugin' );
+			wp_enqueue_script( 'wp-countup-js-core', WP_COUNTUP_JS_URL . 'public/js/countUp.js', array( 'jquery' ), $this->version );
+			wp_enqueue_script( 'wp-countup-js-plugin', WP_COUNTUP_JS_URL . 'public/js/showCounter.js', array( 'jquery' ), $this->version );
 
 			wp_localize_script( 'wp-countup-js-plugin', 'WP_CountUp_JS', array(
-				'endInsideShortcode' => isset( $options['end_inside_shortcode'] ),
-				'pluginSettings'     => $plugin_settings,
+				'resetCounterWhenViewAgain' => isset( $options['reset_counter_when_view_again'] ),
+				'endInsideShortcode'        => isset( $options['end_inside_shortcode'] ),
+				'pluginSettings'            => $plugin_settings,
 			) );
 		}
 	}

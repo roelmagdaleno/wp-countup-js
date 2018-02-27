@@ -23,7 +23,7 @@ jQuery( document ).ready( function( $ ) {
 			// the following shortcode structure: [countup start="0" end="55"].
 			//
 			// Be sure that the previous code run before the next code.
-			var count     = WP_CountUp_JS.endInsideShortcode ? $( this ).html() : $( this ).data( 'count' );
+			var count     = WP_CountUp_JS.endInsideShortcode ? $( this ).html() : $( this ).data( 'end' );
 			var start     = $( this ).data( 'start' );
 			var decimals  = $( this ).data( 'decimals' );
 			var duration  = $( this ).data( 'duration' );
@@ -46,11 +46,21 @@ jQuery( document ).ready( function( $ ) {
 			};
 
 			//Loop to options_in_shortcode, this means if one option value inside of shortcode is empty, the default value is pull from the options page.
-			$.each( options_in_shortcode, function( key, value ){
-				if ( value == " " ) {
+			$.each ( options_in_shortcode, function( key, value ) {
+				if ( ' ' == value ) {
 					options[ key ] = WP_CountUp_JS.pluginSettings[ key ];
-				} else {
+				}
+
+				if ( ' ' !== value ) {
 					options[ key ] = value;
+				}
+
+				if ( 'prefix' == key ) {
+					options[ key ] = '<span class="wp_cup_prefix" id="prefix-' + index + '">' + options[ key ] + '</span>';
+				}
+
+				if ( 'suffix' == key ) {
+					options[ key ] = '<span class="wp_cup_suffix" id="suffix-' + index + '">' + options[ key ] + '</span>';
 				}
 			});
 
@@ -69,28 +79,39 @@ jQuery( document ).ready( function( $ ) {
 				counterObjects[ 'counterObj' + index ] = {
 					'counterId'         : '#' + counterId,
 					'objectPositionTop' : objectPositionTop,
-					'numAnimObject'     : numAnim
+					'numAnimObject'     : numAnim,
+					'counterFinished'   : false
 				};
 			}
 		});
 	}
 
-	// Logic got it from: http://stackoverflow.com/a/488073/2644250
+	// Logic from: http://stackoverflow.com/a/488073/2644250
 	function wpcjs_check_visibility() {
 		var docViewTop    = $( window ).scrollTop();
 		var docViewBottom = docViewTop + $( window ).height();
 
 		for ( var i in counterObjects ) {
-    			var elemTop = $( counterObjects[i].counterId ).offset().top;
-    			var elemBottom = elemTop + $( counterObjects[i].counterId ).height();
+			var elemTop    = $( counterObjects[i].counterId ).offset().top;
+			var elemBottom = elemTop + $( counterObjects[i].counterId ).height();
 
-    			if ( ( elemBottom <= docViewBottom ) && ( elemTop >= docViewTop ) ) {
-				counterObjects[i].numAnimObject.start();
+			if ( ( elemBottom <= docViewBottom ) && ( elemTop >= docViewTop ) ) {
+				counterObjects[i].numAnimObject.start( wpcjs_counter_finished.bind( null, i ) );
+			}
+
+			if ( ( WP_CountUp_JS.resetCounterWhenViewAgain && counterObjects[i].counterFinished ) && ( ( docViewTop >= elemTop ) || ( docViewBottom <= elemBottom ) ) ) {
+				counterObjects[i].numAnimObject.reset();
+				counterObjects[i].counterFinished = false;
 			}
 		}
     }
 
+	function wpcjs_counter_finished( obj ) {
+		counterObjects[ obj ].counterFinished = true;
+	}
+
 	wpcjs_get_counter();
 	wpcjs_check_visibility();
+
 	$( window ).on( 'scroll', wpcjs_check_visibility );
 });
