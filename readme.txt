@@ -1,7 +1,11 @@
 # WP CountUP JS #
+* Contributors: rokumetal
+* Donate Link: https://paypal.me/roelmagdaleno
 * Tags: WP CountUP JS, CountUP, CountUP JS, counters, animated
-* Tested up to: 4.9.1
+* Tested up to: 4.9.4
 * Requires at least: 3.0
+* Requires PHP: 5.0
+* Stable tag: 4.0
 * License: GPLv2 or later
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,39 +23,45 @@ You can use this plugin with shortcodes and create a lot of animated numerical c
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Go to "Settings"->"CountUP.js" menu to configure options of the plugin.
 
-## Usage and Options ##
+## Usage & Options ##
 
-Use this plugin, is very easy, you can use it quickly after install it. To do that, you need to use this shortcode:
+Is very easy to use this plugin, you can use the shortcode after install it, but there are two ways to use the plugin:
 
-[countup start="your-value" end="your-value" decimals="your-value" duration="your-value"]
+The first way:
 
-The shortcode accepts those arguments, as you can see previously:
+`[countup start="your-value" end="your-value" decimals="your-value" duration="your-value"]`
 
-[countup
-  start="your-value" //This use a number to begin the counter.
-  end="your-value" //This use a number to end the counter at.
-  decimals="your-value" //This use a number to put decimals to your counter.
-  duration="your-value" //This use a number (seconds) as duration of the counter.
-  scroll="your-value" //Load counter when the page is loaded. Default Value: True.
-]
+The second way. To use this format you need to check the **Use the end number inside the shortcode?** setting in the plugin option page:
+
+`[countup start="the-start-number" decimals="your-value" duration="your-value"]the-end-number[/countup]`
+
+The shortcode accepts the next arguments:
+
+- start - The number that the counter use to start.
+- end - The number that the counter use to end.
+- decimals - Puts the desired decimals into your counter.
+- duration - The counter duration represented by a number (seconds).
+- scroll - If true, start the counter when the user visualize it.
+- suffix - A text that will work as the counter suffix.
+- prefix - A text that will work as the counter prefix.
 
 ## Example ##
 
-[countup start="0" end="55" decimals="0" duration="5" prefix="my_prefix" scroll="false"]
+You can use the shortcode in two ways:
 
-Inside Shortcode Arguments:
+If you are using the first way:
 
-[countup
-  start="your-value" //This use a number to begin the counter.
-  decimals="your-value" //This use a number to put decimals to your counter.
-  duration="your-value" //This use a number (seconds) as duration of the counter.
-  scroll="your-value" //Load counter when the page is loaded. Default Value: True.
-]your-end-number[/countup]
+`[countup start="0" end="55" decimals="2" duration="5" prefix="my_prefix" scroll="false"]`
 
-Example Inside Shortcode:
-[countup start="0" decimals="0" duration="5"]55[/countup]
+If you are using the second way (remember to check the **Use the end number inside the shortcode?**):
 
-Now you know how to use this plugin, but you can edit some options if you required (Go to "Settings"->"CountUP.js").
+`[countup start="0" decimals="2" duration="5"]55[/countup]`
+
+## Settings Page ##
+
+You know how to use the plugin now, but you can still edit some options inside of the plugin settings page (Go to **Settings->CountUP.js**).
+
+Inside of the settings page, you can find the next settings:
 
 - Easing: Easing the counter.
 - Grouping: Groups the content into sections (eg. 1,000 vs 1000).
@@ -77,21 +87,27 @@ Now you know how to use this plugin, but you can edit some options if you requir
 * jQuery issue was solved.
 
 = 2.0 =
-* Now you can add the options from CountUP.js Options Page inside of the shortcode. Please check Usage and Options for more information.
+* Now you can add the options from CountUP.js Options Page inside of the shortcode.
 
 = 2.1 =
-* All counters started their animation before to reach the target counter. Now, when you scrolled to the target counter, the counter will start their animation.
+* All counters starts their animations before to reach the target counter.
+* Now, when you scroll to the target counter, the counter will start its animation.
 
 = 2.2 =
 * Now you can add an option if you wanna start the counter when the page is loaded or when scroll it.
 
 = 2.3 =
-* Bug fixed where counter at the top starts counters at bottom. Now, every counter works independently.
+* Bug fixed where counter at the top starts counters at bottom.
+* Now, every counter works independently.
 
 = 3.0 =
-* Bug fixed where some counters didn't start after scroll into it. And it was implemented two ways to use the shortcode.
+* Bug fixed where some counters didn't start after scroll into it.
+* You can use two ways to use the shortcode.
 
 = 3.1 =
-* Bug fixed where the plugin was initializing at the same time of the other plugins, breaking them.
+* Bug fixed where the plugin was initializing at the same time that other plugins, breaking them.
 
-## Upgrade Notice ##
+= 4.0 =
+
+* The whole plugin is using OOP style.
+* The core plugin was updated to 1.9.3 version.
