@@ -32,7 +32,7 @@ if ( ! class_exists( 'WP_CountUp_JS_Activator' ) ) {
 				'use_sufix'     => '',
 			);
 
-			add_option( 'countupjs-option-page', $default_settings, 'no' );
+			add_option( 'countupjs-option-page', $default_settings );
 		}
 	}
 }
