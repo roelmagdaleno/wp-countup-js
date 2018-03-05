@@ -58,7 +58,7 @@ if ( ! class_exists( 'WP_CountUp_JS_Main' ) ) {
 			);
 
 			wp_enqueue_script( 'wp-countup-js-core', WP_COUNTUP_JS_URL . 'public/js/countUp.js', array( 'jquery' ), $this->version );
-			wp_enqueue_script( 'wp-countup-js-plugin', WP_COUNTUP_JS_URL . 'public/js/showCounter.js', array( 'jquery' ), $this->version );
+			wp_enqueue_script( 'wp-countup-js-plugin', WP_COUNTUP_JS_URL . 'public/js/wp-countup-show-counter.js', array( 'jquery' ), $this->version );
 
 			wp_localize_script( 'wp-countup-js-plugin', 'WP_CountUp_JS', array(
 				'resetCounterWhenViewAgain' => isset( $options['reset_counter_when_view_again'] ),

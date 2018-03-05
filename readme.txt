@@ -5,7 +5,7 @@
 * Tested up to: 4.9.4
 * Requires at least: 3.0
 * Requires PHP: 5.0
-* Stable tag: 4.0
+* Stable tag: 4.0.1
 * License: GPLv2 or later
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,8 @@ If you are using the first way:
 If you are using the second way (remember to check the **Use the end number inside the shortcode?**):
 
 `[countup start="0" decimals="2" duration="5"]55[/countup]`
+
+Copy and paste any example in one of your posts and test.
 
 ## Settings Page ##
 
@@ -108,6 +110,9 @@ Inside of the settings page, you can find the next settings:
 * Bug fixed where the plugin was initializing at the same time that other plugins, breaking them.
 
 = 4.0 =
-
 * The whole plugin is using OOP style.
 * The core plugin was updated to 1.9.3 version.
+
+= 4.0.1 =
+* Bug fixed where uBlock browser extension was blocking the "showCounter.js" file.
+* "showCounter.js" file renamed to "wp-countup-show-counter.js" due to the previous bug.
