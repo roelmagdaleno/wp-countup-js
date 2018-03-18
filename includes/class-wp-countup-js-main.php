@@ -32,12 +32,23 @@ if ( ! class_exists( 'WP_CountUp_JS_Main' ) ) {
 		public function __construct() {
 			$this->version = '4.0.0';
 
+			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_assets' ) );
+
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			new WP_CountUp_JS_Shortcode();
 
 			if ( is_admin() ) {
 				new WP_CountUp_JS_Options_Page();
 			}
+		}
+
+		public function enqueue_assets() {
+			wp_enqueue_script(
+				'wp-countup-js-gutenberg-block',
+				WP_COUNTUP_JS_URL . 'admin/js/wp-countup-js-block.js',
+				[ 'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ],
+				filemtime( WP_COUNTUP_JS_URL . 'admin/js/wp-countup-js-block.js' )
+			);
 		}
 
 		/**
