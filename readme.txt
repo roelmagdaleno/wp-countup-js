@@ -5,7 +5,7 @@
 * Tested up to: 4.9.4
 * Requires at least: 3.0
 * Requires PHP: 5.0
-* Stable tag: 4.0.1
+* Stable tag: 4.0.2
 * License: GPLv2 or later
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,3 +116,6 @@ Inside of the settings page, you can find the next settings:
 = 4.0.1 =
 * Bug fixed where uBlock browser extension was blocking the "showCounter.js" file.
 * "showCounter.js" file renamed to "wp-countup-show-counter.js" due to the previous bug.
+
+= 4.0.2 =
+* Now you can execute a shortcode (that returns a number) inside the counter shortcode.
