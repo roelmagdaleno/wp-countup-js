@@ -4,7 +4,7 @@
 Plugin Name: WP CountUP JS
 Plugin URI:  https://roelmagdaleno.com/plugins/countup-js
 Description: You can create a lot of animated numerical counters and display it into your site.
-Version:     4.0.1
+Version:     4.0.2
 Author:      Roel Magdaleno
 Author URI:  https://roelmagdaleno.com
 License:     GPLv2

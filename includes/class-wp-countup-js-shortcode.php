@@ -36,6 +36,7 @@ if ( ! class_exists( 'WP_CountUp_JS_Shortcode' ) ) {
 		 * Return the rendered counter.
 		 *
 		 * @since  4.0.0
+		 * @since  4.0.2   Now we can execute shortcodes inside the count up shortcode.
 		 *
 		 * @param  array     $attributes   The input user's attributes.
 		 * @param  string    $content      The content to return.
@@ -76,7 +77,7 @@ if ( ! class_exists( 'WP_CountUp_JS_Shortcode' ) ) {
 			}
 
 			if ( isset( $this->settings['end_inside_shortcode'] ) ) {
-				$counter .= '>' . $content;
+				$counter .= '>' . do_shortcode( $content );
 			}
 
 			$counter .= '</div>';
