@@ -4,13 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Access denied.' );
 }
 
-if ( ! class_exists( 'WP_CountUp_JS_Shortcode' ) ) {
+if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 	/**
 	 * Execute the shortcode functionality.
 	 *
 	 * @since  4.0.0
 	 */
-	class WP_CountUp_JS_Shortcode {
+	class WP_CUJS_Shortcode {
 		/**
 		 * The plugin settings.
 		 *
@@ -58,6 +58,8 @@ if ( ! class_exists( 'WP_CountUp_JS_Shortcode' ) ) {
 			);
 			$shortcode_atts = shortcode_atts( $shortcode_args, $attributes );
 
+			$this->enqueue_scripts();
+
 			// The HTML counter.
 			$counter  = '<div class="counter"';
 			$counter .= ' data-start="' . esc_attr( $shortcode_atts['start'] ) . '"';
@@ -83,6 +85,47 @@ if ( ! class_exists( 'WP_CountUp_JS_Shortcode' ) ) {
 			$counter .= '</div>';
 
 			return $counter;
+		}
+
+		/**
+		 * Register the necessary scripts to make the
+		 * plugin work.
+		 *
+		 * @since  4.0.0
+		 */
+		protected function enqueue_scripts() {
+			$options         = get_option( 'countupjs-option-page' );
+			$in_footer       = true;
+			$plugin_settings = array(
+				'useEasing'   => isset( $options['use_easing'] ),
+				'useGrouping' => isset( $options['use_grouping'] ),
+				'separator'   => $options['use_separator'],
+				'decimal'     => $options['use_decimal'],
+				'prefix'      => $options['use_prefix'],
+				'suffix'      => $options['use_sufix'],
+			);
+
+			wp_enqueue_script(
+				'wp-countup-js-core',
+				WP_COUNTUP_JS_URL . 'assets/js/vendor/countUp.js',
+				array( 'jquery' ),
+				WP_COUNTUP_JS_VERSION,
+				$in_footer
+			);
+
+			wp_enqueue_script(
+				'wp-countup-js-plugin',
+				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.js',
+				array( 'jquery' ),
+				WP_COUNTUP_JS_VERSION,
+				$in_footer
+			);
+
+			wp_localize_script( 'wp-countup-js-plugin', 'WP_CountUp_JS', array(
+				'resetCounterWhenViewAgain' => isset( $options['reset_counter_when_view_again'] ),
+				'endInsideShortcode'        => isset( $options['end_inside_shortcode'] ),
+				'pluginSettings'            => $plugin_settings,
+			) );
 		}
 	}
 }
