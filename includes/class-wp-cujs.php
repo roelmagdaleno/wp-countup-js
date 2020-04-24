@@ -6,8 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WP_CUJS' ) ) {
 	/**
-	 * A WordPress plugin about CountUp.js by
-	 * Inorganik.
+	 * A WordPress plugin about CountUp.js by Inorganik.
 	 *
 	 * https://inorganik.github.io/countUp.js/
 	 *
@@ -21,6 +20,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 		 */
 		public function __construct() {
 			new WP_CUJS_Shortcode();
+			new WP_CUJS_Gutenberg_Block();
 
 			if ( ! is_admin() ) {
 				return;
