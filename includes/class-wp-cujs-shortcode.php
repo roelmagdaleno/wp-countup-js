@@ -59,77 +59,87 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 		}
 
 		/**
-		 * Return the rendered counter.
+		 * Return the HTML counter.
 		 *
 		 * @since  4.0.0
 		 * @since  4.0.2   Now we can execute shortcodes inside the count up shortcode.
+		 * @since  4.1.0   Add only the needed attributes instead of all of them.
 		 *
-		 * @param  array     $attributes   The input user's attributes.
-		 * @param  string    $content      The content to return.
-		 * @return string                  The rendered counter.
+		 * @param  array     $raw_atts   The input user's attributes.
+		 * @param  string    $content    The content to return.
+		 * @return string                The rendered counter.
 		 */
-		public function show_counter( $attributes, $content = null ) {
-			$shortcode_args = array(
-				'start'     => '0',
-				'end'       => '1000',
-				'decimals'  => '0',
-				'duration'  => '2',
-				'scroll'    => true,
-				'easing'    => true,
-				'grouping'  => true,
-				'separator' => ',',
-				'decimal'   => '.',
-				'prefix'    => '',
-				'suffix'    => '',
-				'delay'     => '0',
-			);
-			$shortcode_atts = shortcode_atts( $shortcode_args, $attributes );
+		public function show_counter( $raw_atts, $content = '' ) {
+			$end_value = $this->get_end_value( $raw_atts, $content );
+
+			if ( 0 === $end_value ) {
+				return '';
+			}
 
 			$this->enqueue_scripts();
 
+			$valid_attributes = array(
+				'start',
+				'decimals',
+				'duration',
+				'scroll',
+				'reset',
+				'easing',
+				'grouping',
+				'separator',
+				'prefix',
+				'suffix',
+				'delay',
+			);
+
 			// The HTML counter.
-			$counter  = '<div class="counter" ';
-			$counter .= 'data-start="' . esc_attr( $shortcode_atts['start'] ) . '"' ;
-			$counter .= 'data-decimals="' . esc_attr( $shortcode_atts['decimals'] ) . '"' ;
-			$counter .= 'data-duration="' . esc_attr( $shortcode_atts['duration'] ) . '"' ;
-			$counter .= 'data-scroll="' . esc_attr( $shortcode_atts['scroll'] ) . '"' ;
-			$counter .= 'data-easing="' . esc_attr( $shortcode_atts['easing'] ) . '"' ;
-			$counter .= 'data-grouping="' . esc_attr( $shortcode_atts['grouping'] ) . '"' ;
-			$counter .= 'data-separator="' . esc_attr( $shortcode_atts['separator'] ) . '"' ;
-			$counter .= 'data-decimal="' . esc_attr( $shortcode_atts['decimal'] ) . '"' ;
-			$counter .= 'data-prefix="' . esc_attr( $shortcode_atts['prefix'] ) . '"' ;
-			$counter .= 'data-suffix="' . esc_attr( $shortcode_atts['suffix'] ) . '"' ;
-			$counter .= 'data-delay="' . esc_attr( $shortcode_atts['delay'] ) . '" ';
+			$counter = '<div class="counter" ';
 
-			if ( ! isset( $this->settings['end_inside_shortcode'] ) ) {
-				$counter .= 'data-end="' . esc_attr( $shortcode_atts['end'] ) . '">';
+			foreach ( $raw_atts as $attribute => $value ) {
+				if ( ! in_array( $attribute, $valid_attributes, true ) ) {
+					continue;
+				}
+
+				$counter .= 'data-' . esc_attr( $attribute ) . '="' . esc_attr( $value ) . '" ';
 			}
 
-			if ( isset( $this->settings['end_inside_shortcode'] ) ) {
-				$counter .= '>' . do_shortcode( $content );
-			}
-
+			$counter .= 'data-end="' . $end_value . '">';
 			$counter .= '</div>';
 
 			return $counter;
 		}
 
 		/**
-		 * Register the necessary scripts to make the
-		 * plugin work.
+		 * Get the end target value to use in the counter.
 		 *
-		 * @since  4.0.0
+		 * @since  4.1.0
+		 * @access private
+		 *
+		 * @param  array    $raw_atts   The input user's attributes.
+		 * @param  string   $content    The content to return.
+		 * @return int                  The counter end value.
+		 */
+		private function get_end_value( $raw_atts, $content ) {
+			$end_value = (int) isset( $this->settings['end_inside_shortcode'] ) ? do_shortcode( $content ) : $raw_atts['end'];
+			$end_value = ! is_numeric( $end_value ) ? 0 : $end_value;
+
+			return apply_filters( 'wp_cujs_get_end_value', $end_value );
+		}
+
+		/**
+		 * Register the necessary scripts to make the plugin work.
+		 *
+		 * @since 4.0.0
 		 */
 		protected function enqueue_scripts() {
-			$options         = get_option( 'countupjs-option-page' );
 			$in_footer       = true;
 			$plugin_settings = array(
-				'useEasing'   => isset( $options['use_easing'] ),
-				'useGrouping' => isset( $options['use_grouping'] ),
-				'separator'   => $options['use_separator'],
-				'decimal'     => $options['use_decimal'],
-				'prefix'      => $options['use_prefix'],
-				'suffix'      => $options['use_sufix'],
+				'useEasing'   => isset( $this->settings['use_easing'] ),
+				'useGrouping' => isset( $this->settings['use_grouping'] ),
+				'separator'   => $this->settings['use_separator'],
+				'decimal'     => $this->settings['use_decimal'],
+				'prefix'      => $this->settings['use_prefix'],
+				'suffix'      => $this->settings['use_sufix'],
 			);
 
 			wp_enqueue_script(
@@ -149,8 +159,8 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 			);
 
 			wp_localize_script( 'wp-countup-js-plugin', 'WP_CU_JS', array(
-				'resetCounterWhenViewAgain' => isset( $options['reset_counter_when_view_again'] ),
-				'endInsideShortcode'        => isset( $options['end_inside_shortcode'] ),
+				'resetCounterWhenViewAgain' => isset( $this->settings['reset_counter_when_view_again'] ),
+				'endInsideShortcode'        => isset( $this->settings['end_inside_shortcode'] ),
 				'pluginSettings'            => $plugin_settings,
 			) );
 		}
