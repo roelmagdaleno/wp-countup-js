@@ -5,8 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once 'constants.php';
-require_once 'class-wp-cujs-activator.php';
-require_once 'class-wp-cujs-settings.php';
+
+// HTML
+require_once 'html/class-wp-cujs-html-checkbox.php';
+require_once 'html/class-wp-cujs-html-text.php';
+
 require_once 'class-wp-cujs-options.php';
 require_once 'class-wp-cujs-shortcode.php';
 require_once 'class-wp-cujs-gutenberg-block.php';
