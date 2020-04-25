@@ -53,6 +53,10 @@ function WP_CUPJS_startCounter( counterEl ) {
     let countUp = new CountUp( counterEl, parseInt( endVal ), WP_CUPJS_getOptions( counterEl ) );
     const delay = parseInt( counterEl.dataset.delay );
 
+    if ( counterEl.dataset.hasOwnProperty( 'alreadyScrolled' ) && onScroll ) {
+        WP_CUPJS_OBSERVER.unobserve( counterEl );
+    }
+
     if ( 0 === delay || isNaN( delay ) ) {
         countUp.start();
         return;
