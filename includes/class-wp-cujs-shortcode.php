@@ -29,7 +29,33 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 		 */
 		public function __construct() {
 			$this->settings = get_option( 'countupjs-option-page' );
+
+			add_filter( 'script_loader_tag', array( $this, 'add_module_attribute' ), 10, 2 );
 			add_shortcode( 'countup', array( $this, 'show_counter' ) );
+		}
+
+		/**
+		 * The countUp.min.js file (2.0.4) is exported as a ES6 module
+		 * that's why we need to add the module attribute in the script and
+		 * the same for our own script.
+		 *
+		 * @since  4.1.0
+		 *
+		 * @param  string   $tag      The current script tag to render in HTML.
+		 * @param  string   $handle   The current handle script name.
+		 * @return string             The script tag with module type.
+		 */
+		public function add_module_attribute( $tag, $handle ) {
+			$valid_handles = array(
+				'countUp.min.js',
+				'wp-countup-js-plugin',
+			);
+
+			if ( ! in_array( $handle, $valid_handles, true ) ) {
+				return $tag;
+			}
+
+			return str_replace( ' src', ' type="module" src', $tag );
 		}
 
 		/**
@@ -48,34 +74,34 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 				'end'       => '1000',
 				'decimals'  => '0',
 				'duration'  => '2',
-				'scroll'    => 'true',
-				'easing'    => ' ',
-				'grouping'  => ' ',
-				'separator' => ' ',
-				'decimal'   => ' ',
-				'prefix'    => ' ',
-				'suffix'    => ' ',
+				'scroll'    => true,
+				'easing'    => true,
+				'grouping'  => true,
+				'separator' => ',',
+				'decimal'   => '.',
+				'prefix'    => '',
+				'suffix'    => '',
+				'delay'     => '0',
 			);
 			$shortcode_atts = shortcode_atts( $shortcode_args, $attributes );
 
 			$this->enqueue_scripts();
 
 			// The HTML counter.
-			$counter  = '<div class="counter"';
-			$counter .= ' data-start="' . esc_attr( $shortcode_atts['start'] ) . '"';
-			$counter .= ' data-decimals="' . esc_attr( $shortcode_atts['decimals'] ) . '"';
-			$counter .= ' data-duration="' . esc_attr( $shortcode_atts['duration'] ) . '"';
-			$counter .= ' data-scroll="' . esc_attr( $shortcode_atts['scroll'] ) . '"';
-			$counter .= ' data-easing="' . esc_attr( $shortcode_atts['easing'] ) . '"';
-			$counter .= ' data-grouping="' . esc_attr( $shortcode_atts['grouping'] ) . '"';
-			$counter .= ' data-separator="' . esc_attr( $shortcode_atts['separator'] ) . '"';
-			$counter .= ' data-decimal="' . esc_attr( $shortcode_atts['decimal'] ) . '"';
-			$counter .= ' data-prefix="' . esc_attr( $shortcode_atts['prefix'] ) . '"';
-			$counter .= ' data-suffix="' . esc_attr( $shortcode_atts['suffix'] ) . '"';
+			$counter  = '<div class="counter" ';
+			$counter .= 'data-start="' . esc_attr( $shortcode_atts['start'] ) . '"' ;
+			$counter .= 'data-decimals="' . esc_attr( $shortcode_atts['decimals'] ) . '"' ;
+			$counter .= 'data-duration="' . esc_attr( $shortcode_atts['duration'] ) . '"' ;
+			$counter .= 'data-scroll="' . esc_attr( $shortcode_atts['scroll'] ) . '"' ;
+			$counter .= 'data-easing="' . esc_attr( $shortcode_atts['easing'] ) . '"' ;
+			$counter .= 'data-grouping="' . esc_attr( $shortcode_atts['grouping'] ) . '"' ;
+			$counter .= 'data-separator="' . esc_attr( $shortcode_atts['separator'] ) . '"' ;
+			$counter .= 'data-decimal="' . esc_attr( $shortcode_atts['decimal'] ) . '"' ;
+			$counter .= 'data-prefix="' . esc_attr( $shortcode_atts['prefix'] ) . '"' ;
+			$counter .= 'data-suffix="' . esc_attr( $shortcode_atts['suffix'] ) . '"' ;
 
 			if ( ! isset( $this->settings['end_inside_shortcode'] ) ) {
-				$counter .= ' data-end="' . esc_attr( $shortcode_atts['end'] ) . '"';
-				$counter .= '>';
+				$counter .= 'data-end="' . esc_attr( $shortcode_atts['end'] ) . '">';
 			}
 
 			if ( isset( $this->settings['end_inside_shortcode'] ) ) {
@@ -106,10 +132,10 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 			);
 
 			wp_enqueue_script(
-				'wp-countup-js-core',
-				WP_COUNTUP_JS_URL . 'assets/js/vendor/countUp.js',
+				'countUp.min.js',
+				WP_COUNTUP_JS_URL . 'assets/js/vendor/countUp.min.js',
 				array( 'jquery' ),
-				WP_COUNTUP_JS_VERSION,
+				'2.0.4',
 				$in_footer
 			);
 
@@ -121,7 +147,7 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 				$in_footer
 			);
 
-			wp_localize_script( 'wp-countup-js-plugin', 'WP_CountUp_JS', array(
+			wp_localize_script( 'wp-countup-js-plugin', 'WP_CU_JS', array(
 				'resetCounterWhenViewAgain' => isset( $options['reset_counter_when_view_again'] ),
 				'endInsideShortcode'        => isset( $options['end_inside_shortcode'] ),
 				'pluginSettings'            => $plugin_settings,
