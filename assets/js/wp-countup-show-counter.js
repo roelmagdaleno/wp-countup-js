@@ -16,6 +16,18 @@ function WP_CUPJS_getSuffix( counterId, suffix ) {
     return `<span class="wp_cup_suffix" id="suffix-${ counterId }">${ suffix }</span>`;
 }
 
+function WP_CUPJS_startCounter( counterEl, endVal, options ) {
+    let countUp = new CountUp( counterEl, parseInt( endVal ), options );
+    const delay = parseInt( counterEl.dataset.delay );
+
+    if ( 0 === delay || isNaN( delay ) ) {
+        countUp.start();
+        return;
+    }
+
+    setTimeout( () => countUp.start(), delay );
+}
+
 function WP_CUPJS_initCounters() {
     const counters = document.querySelectorAll( '.counter' );
 
@@ -37,8 +49,7 @@ function WP_CUPJS_initCounters() {
             suffix: WP_CUPJS_getSuffix( counterEl.id, counterEl.dataset.suffix )
         };
 
-        let countUp = new CountUp( counterEl, parseInt( endVal ), options );
-        countUp.start();
+        WP_CUPJS_startCounter( counterEl, endVal, options );
     }
 }
 

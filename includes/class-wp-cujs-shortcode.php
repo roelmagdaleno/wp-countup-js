@@ -99,6 +99,7 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 			$counter .= 'data-decimal="' . esc_attr( $shortcode_atts['decimal'] ) . '"' ;
 			$counter .= 'data-prefix="' . esc_attr( $shortcode_atts['prefix'] ) . '"' ;
 			$counter .= 'data-suffix="' . esc_attr( $shortcode_atts['suffix'] ) . '"' ;
+			$counter .= 'data-delay="' . esc_attr( $shortcode_atts['delay'] ) . '" ';
 
 			if ( ! isset( $this->settings['end_inside_shortcode'] ) ) {
 				$counter .= 'data-end="' . esc_attr( $shortcode_atts['end'] ) . '">';
