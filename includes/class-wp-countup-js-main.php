@@ -35,7 +35,7 @@ if ( ! class_exists( 'WP_CountUp_JS_Main' ) ) {
 			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_assets' ) );
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
-			new WP_CountUp_JS_Shortcode();
+			new WP_CUJS_Shortcode();
 
 			if ( is_admin() ) {
 				new WP_CountUp_JS_Options_Page();
