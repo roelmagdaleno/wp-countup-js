@@ -37,7 +37,8 @@ registerBlockType( 'roelmagdaleno/wp-countup-js', {
             default: !! WP_CU_JS.pluginSettings.useEasing
         },
         scroll: {
-            type: 'boolean'
+            type: 'boolean',
+            default: false
         },
         reset: {
             type: 'boolean',

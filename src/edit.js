@@ -32,40 +32,48 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
         reset
     } = attributes;
 
-    const buttonStyles = {
-        width: "100%",
-        textAlign: "center",
-        display: "inline-block"
-    };
+    function playCounter() {
+        const container = document.getElementById( `block-${ clientId }` );
+
+        if ( ! container ) {
+            return;
+        }
+
+        const counterEl = container.querySelector( '.counter' );
+
+        if ( ! counterEl ) {
+            return;
+        }
+
+        counterEl.dataset.start     = start;
+        counterEl.dataset.duration  = duration;
+        counterEl.dataset.delay     = delay;
+        counterEl.dataset.decimal   = decimal;
+        counterEl.dataset.decimals  = decimals;
+        counterEl.dataset.separator = separator;
+        counterEl.dataset.suffix    = suffix;
+        counterEl.dataset.prefix    = prefix;
+        counterEl.dataset.grouping  = grouping;
+        counterEl.dataset.easing    = easing;
+        counterEl.dataset.scroll    = scroll;
+        counterEl.dataset.reset     = reset;
+        counterEl.dataset.end       = end;
+
+        window.WP_CU_JS.startCounter( counterEl );
+    }
 
     return (
         <>
             <Fragment>
                 <InspectorControls>
-                    <Panel>
+                    <Panel className = 'wp-cujs-block__play-counter__panel'>
                         <PanelBody>
                             <PanelRow>
                                 <Button
                                     isPrimary
                                     label = 'Play Counter'
-                                    style = { buttonStyles }
-                                    onClick = { () => {
-                                        const container = document.getElementById( `block-${ clientId }` );
-
-                                        if ( ! container ) {
-                                            return;
-                                        }
-
-                                        const counterEl = container.querySelector( '.counter' );
-
-                                        if ( ! counterEl ) {
-                                            return;
-                                        }
-
-                                        counterEl.dataset.suffix = suffix;
-
-                                        window.WP_CU_JS.startCounter( counterEl );
-                                    } }
+                                    className = 'wp-cujs-block__play-counter__button'
+                                    onClick = { () => playCounter() }
                                 >Play Counter</Button>
                             </PanelRow>
                         </PanelBody>
