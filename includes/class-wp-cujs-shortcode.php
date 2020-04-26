@@ -12,24 +12,12 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 	 */
 	class WP_CUJS_Shortcode {
 		/**
-		 * The plugin settings.
-		 *
-		 * @since  4.0.0
-		 * @access private
-		 *
-		 * @var    array   $settings   The plugin settings.
-		 */
-		private $settings;
-
-		/**
 		 * Set the plugin settings and add the
 		 * shortcode functionality.
 		 *
 		 * @since  4.0.0
 		 */
 		public function __construct() {
-			$this->settings = get_option( 'countupjs-option-page' );
-
 			add_filter( 'script_loader_tag', array( $this, 'add_module_attribute' ), 10, 2 );
 			add_shortcode( 'countup', array( $this, 'show_counter' ) );
 		}
@@ -76,8 +64,6 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 				return '';
 			}
 
-			$this->enqueue_scripts();
-
 			$valid_attributes = array(
 				'start',
 				'decimals',
@@ -120,49 +106,11 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 		 * @return int                  The counter end value.
 		 */
 		private function get_end_value( $raw_atts, $content ) {
-			$end_value = (int) isset( $this->settings['end_inside_shortcode'] ) ? do_shortcode( $content ) : $raw_atts['end'];
+			$settings  = WP_CUJS::get_instance()->settings;
+			$end_value = (int) isset( $settings['end_inside_shortcode'] ) ? do_shortcode( $content ) : $raw_atts['end'];
 			$end_value = ! is_numeric( $end_value ) ? 0 : $end_value;
 
 			return apply_filters( 'wp_cujs_get_end_value', $end_value );
-		}
-
-		/**
-		 * Register the necessary scripts to make the plugin work.
-		 *
-		 * @since 4.0.0
-		 */
-		protected function enqueue_scripts() {
-			$in_footer       = true;
-			$plugin_settings = array(
-				'useEasing'   => isset( $this->settings['use_easing'] ),
-				'useGrouping' => isset( $this->settings['use_grouping'] ),
-				'separator'   => $this->settings['use_separator'],
-				'decimal'     => $this->settings['use_decimal'],
-				'prefix'      => $this->settings['use_prefix'],
-				'suffix'      => $this->settings['use_sufix'],
-			);
-
-			wp_enqueue_script(
-				'countUp.min.js',
-				WP_COUNTUP_JS_URL . 'assets/js/vendor/countUp.min.js',
-				array( 'jquery' ),
-				'2.0.4',
-				$in_footer
-			);
-
-			wp_enqueue_script(
-				'wp-countup-js-plugin',
-				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
-				array( 'jquery' ),
-				WP_COUNTUP_JS_VERSION,
-				$in_footer
-			);
-
-			wp_localize_script( 'wp-countup-js-plugin', 'WP_CU_JS', array(
-				'resetCounterWhenViewAgain' => isset( $this->settings['reset_counter_when_view_again'] ),
-				'endInsideShortcode'        => isset( $this->settings['end_inside_shortcode'] ),
-				'pluginSettings'            => $plugin_settings,
-			) );
 		}
 	}
 }

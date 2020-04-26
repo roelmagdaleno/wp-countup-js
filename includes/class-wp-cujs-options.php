@@ -44,7 +44,7 @@ if ( ! class_exists( 'WP_CUJS_Options' ) ) {
 		 * @since  4.0.0
 		 */
 		public function __construct() {
-			$this->settings = get_option( self::OPTION_NAME );
+			$this->settings = WP_CUJS::get_instance()->settings;
 
 			add_action( 'admin_menu', array( $this, 'register_submenu' ) );
 			add_action( 'admin_init', array( $this, 'add_fields' ) );

@@ -5,6 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
+	/**
+	 * Register our custom Gutenberg block in WordPress.
+	 *
+	 * @since 4.1.0
+	 */
 	class WP_CUJS_Gutenberg_Block {
 		/**
 		 * The script handle to register in queue.
@@ -14,21 +19,24 @@ if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
 		 */
 		private const SCRIPT_HANDLE = 'wp-cujs-block.js';
 
+		/**
+		 * Initialize the actions to register our Gutenberg block
+		 * in WordPress and to enqueue the scripts.
+		 *
+		 * @since 4.1.0
+		 */
 		public function __construct() {
 			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_block_assets' ) );
 			add_action( 'init', array( $this, 'register_block_type' ) );
 		}
 
+		/**
+		 * Enqueue the scripts in the post block editor.
+		 *
+		 * @since 4.1.0
+		 */
 		public function enqueue_editor_block_assets() {
 			$in_footer = true;
-
-			wp_enqueue_script(
-				'countUp.min.js',
-				WP_COUNTUP_JS_URL . 'assets/js/vendor/countUp.min.js',
-				null,
-				'2.0.4',
-				$in_footer
-			);
 
 			wp_enqueue_script(
 				'wp-countup-js-plugin',
@@ -53,7 +61,7 @@ if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
 				WP_COUNTUP_JS_VERSION
 			);
 
-			$settings        = get_option( 'countupjs-option-page' );
+			$settings        = WP_CUJS::get_instance()->settings;
 			$plugin_settings = array(
 				'useEasing'   => isset( $settings['use_easing'] ),
 				'useGrouping' => isset( $settings['use_grouping'] ),
@@ -70,12 +78,16 @@ if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
 			);
 
 			wp_localize_script( self::SCRIPT_HANDLE, 'WP_CU_JS', $args );
-
-			register_block_type( 'wp-countup-js/counter', array(
-				'editor_script' => 'wp-cujs-gutenberg-block-script',
-			) );
 		}
 
+		/**
+		 * Register the our block in WordPress.
+		 *
+		 * Our namespace is from WP_COUNTUP_JS_GUTENBERG_NAMESPACE constant
+		 * and is equal to "roelmagdaleno/wp-countup-js".
+		 *
+		 * @since 4.1.0
+		 */
 		public function register_block_type() {
 			$args = array( 'editor_script' => self::SCRIPT_HANDLE );
 			register_block_type( WP_COUNTUP_JS_GUTENBERG_NAMESPACE, $args );
