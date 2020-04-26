@@ -5,6 +5,8 @@ const WP_CUPJS_OBSERVER = new IntersectionObserver( WP_CUPJS_startCounterOnScrol
     threshold: 0.7
 } );
 
+let WP_CUPJS_TIMERS = {};
+
 /**
  * Start the counters that are intersecting using the scroll
  * functionality.
@@ -118,6 +120,10 @@ function WP_CUPJS_resetCounter( counterEl ) {
     const countUp = new CountUp( counterEl );
     countUp.reset();
 
+    if ( WP_CUPJS_TIMERS.hasOwnProperty( counterEl.id ) ) {
+        clearTimeout( WP_CUPJS_TIMERS[ counterEl.id ] );
+    }
+
     delete counterEl.dataset.observed;
 }
 
@@ -171,7 +177,7 @@ function WP_CUPJS_startCounter( counterEl, isObserved = true ) {
         return;
     }
 
-    setTimeout( () => countUp.start(), delay );
+    WP_CUPJS_TIMERS[ counterEl.id ] = setTimeout( () => countUp.start(), delay );
 }
 
 /**
