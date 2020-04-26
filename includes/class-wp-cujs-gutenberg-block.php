@@ -32,8 +32,7 @@ if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
 
 			wp_enqueue_script(
 				'wp-countup-js-plugin',
-//				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
-				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.js',
+				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
 				null,
 				WP_COUNTUP_JS_VERSION,
 				$in_footer
