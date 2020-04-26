@@ -39,12 +39,19 @@ if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
 				$in_footer
 			);
 
-			wp_register_script(
+			wp_enqueue_script(
 				self::SCRIPT_HANDLE,
 				plugins_url( 'admin/js/wp-cujs-block.js', __DIR__ ),
 				array( 'wp-blocks', 'wp-editor', 'wp-element' ),
 				WP_COUNTUP_JS_VERSION,
 				$in_footer
+			);
+
+			wp_enqueue_style(
+				'wp-cujs-block.css',
+				plugins_url( 'admin/css/wp-cujs-block.css', __DIR__ ),
+				null,
+				WP_COUNTUP_JS_VERSION
 			);
 
 			$settings        = get_option( 'countupjs-option-page' );
