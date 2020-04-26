@@ -7,6 +7,8 @@ const WP_CUPJS_OBSERVER = new IntersectionObserver( WP_CUPJS_startCounterOnScrol
 
 let WP_CUPJS_TIMERS = {};
 
+window.WP_CU_JS.startCounter = ( counterEl ) => WP_CUPJS_startCounter( counterEl );
+
 /**
  * Start the counters that are intersecting using the scroll
  * functionality.
