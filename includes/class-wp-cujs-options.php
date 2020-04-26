@@ -145,14 +145,14 @@ if ( ! class_exists( 'WP_CUJS_Options' ) ) {
 				'end_inside_shortcode'          => array(
 					'id'        => 'end_inside_shortcode',
 					'name'      => 'end_inside_shortcode',
-					'title'     => 'Use the end number inside the shortcode?',
+					'title'     => 'Use number inside shortcode',
 					'type'      => 'checkbox',
 					'help_tip'  => 'If this option is checked, you must use the shortcode like this: <code>[countup start="0" more options here]55[/countup]</code>',
 				),
 				'reset_counter_when_view_again' => array(
 					'id'        => 'reset_counter_when_view_again',
 					'name'      => 'reset_counter_when_view_again',
-					'title'     => 'Reset the counter when view again?',
+					'title'     => 'Reset counter after view',
 					'type'      => 'checkbox',
 					'help_tip'  => 'If this option is checked, the counter will reset if you scroll and view it again.',
 				),
