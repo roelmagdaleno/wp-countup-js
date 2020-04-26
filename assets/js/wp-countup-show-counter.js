@@ -215,11 +215,11 @@ function WP_CUPJS_getOptions( counterEl ) {
     }
 
     if ( dataset.hasOwnProperty( 'grouping' ) ) {
-        options.useGrouping = dataset.grouping;
+        options.useGrouping = 'false' !== dataset.grouping;
     }
 
     if ( dataset.hasOwnProperty( 'easing' ) ) {
-        options.useEasing = dataset.easing;
+        options.useEasing = 'false' !== dataset.easing;
     }
 
     if ( dataset.hasOwnProperty( 'separator' ) ) {
