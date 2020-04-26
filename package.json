@@ -4,7 +4,9 @@
   "description": "Create animated incremental numerical counters and display it into your site.",
   "main": "index.js",
   "scripts": {
-    "minify": "terser assets/js/wp-countup-show-counter.js --compress --mangle --output assets/js/wp-countup-show-counter.min.js"
+    "minify": "terser assets/js/wp-countup-show-counter.js --compress --mangle --output assets/js/wp-countup-show-counter.min.js",
+    "start": "node_modules/.bin/wp-scripts start src/wp-cujs-block.js  --output-path=admin/js",
+    "build": "node_modules/.bin/wp-scripts build src/wp-cujs-block.js  --output-path=admin/js"
   },
   "repository": {
     "type": "git",
