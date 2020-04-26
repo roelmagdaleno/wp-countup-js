@@ -152,7 +152,7 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 
 			wp_enqueue_script(
 				'wp-countup-js-plugin',
-				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.js',
+				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
 				array( 'jquery' ),
 				WP_COUNTUP_JS_VERSION,
 				$in_footer
