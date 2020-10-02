@@ -1,5 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import edit from './edit';
+import save from './save';
 import attributes from './attributes';
 
 registerBlockType( 'roelmagdaleno/wp-countup-js', {
@@ -10,6 +11,5 @@ registerBlockType( 'roelmagdaleno/wp-countup-js', {
     keywords: [ 'counter', 'countup', 'animate' ],
     attributes,
     edit,
-    save: () => {
-    }
+    save
 } );

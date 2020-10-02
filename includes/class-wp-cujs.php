@@ -56,7 +56,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 		 */
 		public function __construct() {
 			self::$instance = $this;
-			$this->settings = get_option( 'countupjs-option-page' );
+			$this->settings = get_option( 'countupjs-option-page', array() );
 
 			register_activation_hook( __FILE__, array( $this, 'install_default_options' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -174,7 +174,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 		 * @since 4.1.0
 		 */
 		public function install_default_options() {
-			if ( $this->settings ) {
+			if ( empty( $this->settings ) ) {
 				return;
 			}
 

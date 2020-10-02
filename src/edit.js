@@ -4,7 +4,8 @@ import {
     PanelRow,
     TextControl,
     ToggleControl,
-    Button
+    Button,
+    FontSizePicker
 } from '@wordpress/components';
 
 import {
@@ -12,11 +13,16 @@ import {
 } from '@wordpress/element';
 
 import {
-    InspectorControls
+    InspectorControls,
+    BlockControls,
+    BlockAlignmentToolbar, AlignmentToolbar
 } from '@wordpress/block-editor';
+
+import { generateCounterHTML } from './utils';
 
 const edit = ( { attributes, setAttributes, clientId } ) => {
     const {
+        id,
         start,
         end,
         decimals,
@@ -29,36 +35,18 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
         prefix,
         suffix,
         scroll,
-        reset
+        reset,
+        align
     } = attributes;
 
+    setAttributes( { id: clientId } );
+
+    const divStyle = {
+        textAlign: align
+    };
+
     function playCounter() {
-        const container = document.getElementById( `block-${ clientId }` );
-
-        if ( ! container ) {
-            return;
-        }
-
-        const counterEl = container.querySelector( '.counter' );
-
-        if ( ! counterEl ) {
-            return;
-        }
-
-        counterEl.dataset.start     = start;
-        counterEl.dataset.duration  = duration;
-        counterEl.dataset.delay     = delay;
-        counterEl.dataset.decimal   = decimal;
-        counterEl.dataset.decimals  = decimals;
-        counterEl.dataset.separator = separator;
-        counterEl.dataset.suffix    = suffix;
-        counterEl.dataset.prefix    = prefix;
-        counterEl.dataset.grouping  = grouping;
-        counterEl.dataset.easing    = easing;
-        counterEl.dataset.scroll    = scroll;
-        counterEl.dataset.reset     = reset;
-        counterEl.dataset.end       = end;
-
+        const counterEl = generateCounterHTML( clientId, attributes );
         window.WP_CU_JS.startCounter( counterEl );
     }
 
@@ -124,7 +112,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                     </Panel>
 
                     <Panel>
-                        <PanelBody title = "Settings" initialOpen = { false }>
+                        <PanelBody title = "Options" initialOpen = { false }>
                             <PanelRow>
                                 <TextControl
                                     label = 'Decimal'
@@ -169,11 +157,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     onChange = { ( suffix ) => setAttributes( { suffix } ) }
                                 />
                             </PanelRow>
-                        </PanelBody>
-                    </Panel>
 
-                    <Panel>
-                        <PanelBody title = "Extras" initialOpen = { false }>
                             <PanelRow>
                                 <ToggleControl
                                     label = 'Group Digits'
@@ -212,7 +196,17 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                     </Panel>
                 </InspectorControls>
 
-                <div className="counter" data-end = { end }>
+                <BlockControls>
+                    <AlignmentToolbar
+                        value = { align }
+                        onChange = { ( align ) => setAttributes( { align } ) }
+                    />
+                </BlockControls>
+
+                <div className="counter"
+                     data-end = { end }
+                     style = { divStyle }
+                >
                     { end }
                 </div>
             </Fragment>
