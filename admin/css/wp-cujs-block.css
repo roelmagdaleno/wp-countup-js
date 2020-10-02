@@ -1,0 +1,11 @@
+.wp-cujs-block__play-counter__panel {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.wp-cujs-block__play-counter__button {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}

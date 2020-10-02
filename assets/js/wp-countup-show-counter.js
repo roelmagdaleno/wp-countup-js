@@ -7,6 +7,8 @@ const WP_CUPJS_OBSERVER = new IntersectionObserver( WP_CUPJS_startCounterOnScrol
 
 let WP_CUPJS_TIMERS = {};
 
+window.WP_CU_JS.startCounter = ( counterEl ) => WP_CUPJS_startCounter( counterEl );
+
 /**
  * Start the counters that are intersecting using the scroll
  * functionality.
@@ -213,11 +215,11 @@ function WP_CUPJS_getOptions( counterEl ) {
     }
 
     if ( dataset.hasOwnProperty( 'grouping' ) ) {
-        options.useGrouping = dataset.grouping;
+        options.useGrouping = 'false' !== dataset.grouping;
     }
 
     if ( dataset.hasOwnProperty( 'easing' ) ) {
-        options.useEasing = dataset.easing;
+        options.useEasing = 'false' !== dataset.easing;
     }
 
     if ( dataset.hasOwnProperty( 'separator' ) ) {

@@ -1,0 +1,34 @@
+{
+  "name": "wp-countup-js",
+  "version": "4.1.0",
+  "description": "Create animated incremental numerical counters and display it into your site.",
+  "main": "index.js",
+  "scripts": {
+    "minify": "terser assets/js/wp-countup-show-counter.js --compress --mangle --output assets/js/wp-countup-show-counter.min.js",
+    "start": "node_modules/.bin/wp-scripts start src/wp-cujs-block.js  --output-path=admin/js",
+    "build": "node_modules/.bin/wp-scripts build src/wp-cujs-block.js  --output-path=admin/js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roelmagdaleno/wp-countup-js.git"
+  },
+  "keywords": [
+    "counters",
+    "animated",
+    "countupjs"
+  ],
+  "author": "Roel Magdaleno",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/roelmagdaleno/wp-countup-js/issues"
+  },
+  "homepage": "https://github.com/roelmagdaleno/wp-countup-js#readme",
+  "devDependencies": {
+    "@wordpress/block-editor": "^3.8.0",
+    "@wordpress/components": "^9.3.0",
+    "@wordpress/element": "^2.12.0",
+    "@wordpress/scripts": "^7.2.0",
+    "@wordpress/server-side-render": "^1.9.0",
+    "terser": "^4.6.11"
+  }
+}
