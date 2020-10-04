@@ -65,6 +65,10 @@ function setCounterStyles( attributes, counterEl ) {
         counterEl.style.color = attributes.colorPicker;
     }
 
+    if ( '' !== attributes.bgColor ) {
+        counterEl.style.backgroundColor = attributes.bgColor;
+    }
+
     return counterEl;
 }
 

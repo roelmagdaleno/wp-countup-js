@@ -6373,6 +6373,10 @@ var attributes = {
   colorPicker: {
     type: 'string',
     default: ''
+  },
+  bgColor: {
+    type: 'string',
+    default: ''
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -6424,13 +6428,15 @@ var edit = function edit(_ref) {
       bold = attributes.bold,
       italic = attributes.italic,
       fontSize = attributes.fontSize,
-      colorPicker = attributes.colorPicker;
+      colorPicker = attributes.colorPicker,
+      bgColor = attributes.bgColor;
   var divStyle = {
     textAlign: align,
     fontWeight: bold,
     fontStyle: italic,
     fontSize: fontSize,
-    color: colorPicker
+    color: colorPicker,
+    backgroundColor: bgColor
   };
 
   function playCounter() {
@@ -6603,7 +6609,7 @@ var edit = function edit(_ref) {
       var isOpen = _ref2.isOpen,
           onToggle = _ref2.onToggle;
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        isPrimary: true,
+        isSecondary: true,
         onClick: onToggle,
         "aria-expanded": isOpen
       }, "Select Text Color");
@@ -6615,6 +6621,28 @@ var edit = function edit(_ref) {
         onChangeComplete: function onChangeComplete(color) {
           return setAttributes({
             colorPicker: color.hex
+          });
+        }
+      });
+    }
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
+    position: "bottom right",
+    renderToggle: function renderToggle(_ref3) {
+      var isOpen = _ref3.isOpen,
+          onToggle = _ref3.onToggle;
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        isSecondary: true,
+        onClick: onToggle,
+        "aria-expanded": isOpen
+      }, "Select Background Color");
+    },
+    renderContent: function renderContent() {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
+        color: bgColor,
+        disableAlpha: true,
+        onChangeComplete: function onChangeComplete(color) {
+          return setAttributes({
+            bgColor: color.hex
           });
         }
       });
@@ -6740,6 +6768,10 @@ function setCounterStyles(attributes, counterEl) {
 
   if ('' !== attributes.colorPicker) {
     counterEl.style.color = attributes.colorPicker;
+  }
+
+  if ('' !== attributes.bgColor) {
+    counterEl.style.backgroundColor = attributes.bgColor;
   }
 
   return counterEl;

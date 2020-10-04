@@ -39,7 +39,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
         easing, separator, decimal,
         prefix, suffix, scroll,
         reset, align, bold, italic,
-        fontSize, colorPicker
+        fontSize, colorPicker, bgColor
     } = attributes;
 
     const divStyle = {
@@ -47,7 +47,8 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
         fontWeight: bold,
         fontStyle: italic,
         fontSize: fontSize,
-        color: colorPicker
+        color: colorPicker,
+        backgroundColor: bgColor
     };
 
     function playCounter() {
@@ -223,7 +224,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                 <Dropdown
                                     position = 'bottom right'
                                     renderToggle = { ( { isOpen, onToggle } ) => (
-                                        <Button isPrimary onClick = { onToggle } aria-expanded = { isOpen }>
+                                        <Button isSecondary onClick = { onToggle } aria-expanded = { isOpen }>
                                             Select Text Color
                                         </Button>
                                     ) }
@@ -232,6 +233,24 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                             color = { colorPicker }
                                             disableAlpha = { true }
                                             onChangeComplete = { ( color ) => setAttributes( { colorPicker: color.hex } ) }
+                                        />
+                                    ) }
+                                />
+                            </PanelRow>
+
+                            <PanelRow>
+                                <Dropdown
+                                    position = 'bottom right'
+                                    renderToggle = { ( { isOpen, onToggle } ) => (
+                                        <Button isSecondary onClick = { onToggle } aria-expanded = { isOpen }>
+                                            Select Background Color
+                                        </Button>
+                                    ) }
+                                    renderContent = { () => (
+                                        <ColorPicker
+                                            color = { bgColor }
+                                            disableAlpha = { true }
+                                            onChangeComplete = { ( color ) => setAttributes( { bgColor: color.hex } ) }
                                         />
                                     ) }
                                 />

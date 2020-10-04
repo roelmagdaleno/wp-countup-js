@@ -16,7 +16,8 @@ const attributes = {
     bold: { type: 'string', default: 'inherit' },
     italic: { type: 'string', default: 'inherit' },
     fontSize: { type: 'number', default: 21 },
-    colorPicker: { type: 'string', default: '' }
+    colorPicker: { type: 'string', default: '' },
+    bgColor: { type: 'string', default: '' }
 };
 
 export default attributes;
