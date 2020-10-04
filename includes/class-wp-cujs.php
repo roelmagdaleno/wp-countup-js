@@ -56,9 +56,8 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 		 */
 		public function __construct() {
 			self::$instance = $this;
-			$this->settings = get_option( 'countupjs-option-page', array() );
+			$this->settings = get_option( WP_COUNTUP_JS_OPTION_NAME, array() );
 
-			register_activation_hook( __FILE__, array( $this, 'install_default_options' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 			new WP_CUJS_Shortcode();
@@ -174,7 +173,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 		 * @since 4.1.0
 		 */
 		public function install_default_options() {
-			if ( empty( $this->settings ) ) {
+			if ( ! empty( $this->settings ) ) {
 				return;
 			}
 
@@ -187,7 +186,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 				'use_sufix'     => '',
 			);
 
-			update_option( 'countupjs-option-page', $default_settings, 'no' );
+			update_option( WP_COUNTUP_JS_OPTION_NAME, $default_settings, 'no' );
 		}
 	}
 }

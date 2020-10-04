@@ -16,4 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Require the necessary files to run the classes.
 require_once 'includes/required-classes.php';
-new WP_CUJS();
+
+$instance = new WP_CUJS();
+register_activation_hook( __FILE__, array( $instance, 'install_default_options' ) );

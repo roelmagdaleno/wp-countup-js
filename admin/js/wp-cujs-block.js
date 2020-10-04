@@ -6368,6 +6368,10 @@ var attributes = {
   italic: {
     type: 'string',
     default: 'inherit'
+  },
+  fontSize: {
+    type: 'number',
+    default: 21
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -6417,11 +6421,13 @@ var edit = function edit(_ref) {
       reset = attributes.reset,
       align = attributes.align,
       bold = attributes.bold,
-      italic = attributes.italic;
+      italic = attributes.italic,
+      fontSize = attributes.fontSize;
   var divStyle = {
     textAlign: align,
     fontWeight: bold,
-    fontStyle: italic
+    fontStyle: italic,
+    fontSize: fontSize
   };
 
   function playCounter() {
@@ -6576,6 +6582,18 @@ var edit = function edit(_ref) {
         reset: reset
       });
     }
+  })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Panel"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
+    title: "Styles",
+    initialOpen: false
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["FontSizePicker"], {
+    fontSizes: _utils__WEBPACK_IMPORTED_MODULE_4__["fontSizes"],
+    value: fontSize,
+    withSlider: true,
+    onChange: function onChange(fontSize) {
+      return setAttributes({
+        fontSize: fontSize
+      });
+    }
   }))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["BlockControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["AlignmentToolbar"], {
     value: align,
     onChange: function onChange(align) {
@@ -6638,12 +6656,31 @@ var save = function save(_ref) {
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/*! exports provided: generateCounterHTML */
+/*! exports provided: fontSizes, generateCounterHTML */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fontSizes", function() { return fontSizes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateCounterHTML", function() { return generateCounterHTML; });
+var fontSizes = [{
+  name: 'Small',
+  slug: 'small',
+  size: 18
+}, {
+  name: 'Regular',
+  slug: 'regular',
+  size: 21
+}, {
+  name: 'Large',
+  slug: 'large',
+  size: 26.25
+}, {
+  name: 'Larger',
+  slug: 'larger',
+  size: 32
+}];
+
 function constructCounter(attributes) {
   var counterEl = document.createElement('div');
   counterEl = setCounterDataset(attributes, counterEl);
@@ -6666,6 +6703,7 @@ function setCounterDataset(attributes, counterEl) {
 
 function setCounterStyles(attributes, counterEl) {
   counterEl.style.textAlign = attributes.align;
+  counterEl.style.fontSize = "".concat(attributes.fontSize, "px");
 
   if ('inherit' !== attributes.bold) {
     counterEl.style.fontWeight = attributes.bold;

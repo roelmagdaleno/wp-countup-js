@@ -31,3 +31,5 @@ define( 'WP_COUNTUP_JS_URL', plugin_dir_url( __DIR__ ) );
  * @since 4.1.0
  */
 define( 'WP_COUNTUP_JS_GUTENBERG_NAMESPACE', 'roelmagdaleno/wp-countup-js' );
+
+define( 'WP_COUNTUP_JS_OPTION_NAME', 'countupjs-option-page' );

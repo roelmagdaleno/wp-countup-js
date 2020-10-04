@@ -1,3 +1,26 @@
+export const fontSizes = [
+    {
+        name: 'Small',
+        slug: 'small',
+        size: 18,
+    },
+    {
+        name: 'Regular',
+        slug: 'regular',
+        size: 21,
+    },
+    {
+        name: 'Large',
+        slug: 'large',
+        size: 26.25
+    },
+    {
+        name: 'Larger',
+        slug: 'larger',
+        size: 32
+    }
+];
+
 function constructCounter( attributes ) {
     let counterEl = document.createElement( 'div' );
 
@@ -28,6 +51,7 @@ function setCounterDataset( attributes, counterEl ) {
 
 function setCounterStyles( attributes, counterEl ) {
     counterEl.style.textAlign = attributes.align;
+    counterEl.style.fontSize  = `${ attributes.fontSize }px`;
 
     if ( 'inherit' !== attributes.bold ) {
         counterEl.style.fontWeight = attributes.bold;

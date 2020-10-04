@@ -15,7 +15,8 @@ const attributes = {
     suffix:    { type: 'string', default: WP_CU_JS.pluginSettings.suffix },
     align:     { type: 'string', default: 'center' },
     bold:      { type: 'string', default: 'inherit' },
-    italic:    { type: 'string', default: 'inherit' }
+    italic:    { type: 'string', default: 'inherit' },
+    fontSize:  { type: 'number', default: 21 }
 };
 
 export default attributes;

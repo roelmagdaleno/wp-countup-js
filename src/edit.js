@@ -6,7 +6,8 @@ import {
     ToggleControl,
     Button,
     Toolbar,
-    ToolbarButton
+    ToolbarButton,
+    FontSizePicker
 } from '@wordpress/components';
 
 import {
@@ -24,32 +25,26 @@ import {
     AlignmentToolbar
 } from '@wordpress/block-editor';
 
-import { generateCounterHTML } from './utils';
+import {
+    generateCounterHTML,
+    fontSizes
+} from './utils';
 
 const edit = ( { attributes, setAttributes, clientId } ) => {
     const {
-        start,
-        end,
-        decimals,
-        duration,
-        delay,
-        grouping,
-        easing,
-        separator,
-        decimal,
-        prefix,
-        suffix,
-        scroll,
-        reset,
-        align,
-        bold,
-        italic
+        start, end, decimals,
+        duration, delay, grouping,
+        easing, separator, decimal,
+        prefix, suffix, scroll,
+        reset, align, bold, italic,
+        fontSize
     } = attributes;
 
     const divStyle = {
         textAlign: align,
         fontWeight: bold,
-        fontStyle: italic
+        fontStyle: italic,
+        fontSize: fontSize
     };
 
     function playCounter() {
@@ -205,6 +200,19 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     help = 'Reset the counter after view.'
                                     checked = { reset }
                                     onChange = { ( reset ) => setAttributes( { reset } ) }
+                                />
+                            </PanelRow>
+                        </PanelBody>
+                    </Panel>
+
+                    <Panel>
+                        <PanelBody title = "Styles" initialOpen = { false }>
+                            <PanelRow>
+                                <FontSizePicker
+                                    fontSizes = { fontSizes }
+                                    value = { fontSize }
+                                    withSlider = { true }
+                                    onChange = { ( fontSize ) => setAttributes( { fontSize } ) }
                                 />
                             </PanelRow>
                         </PanelBody>
