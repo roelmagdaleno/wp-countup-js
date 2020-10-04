@@ -6302,9 +6302,6 @@ var wordpress = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createEl
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var attributes = {
-  id: {
-    type: 'string'
-  },
   start: {
     type: 'number',
     default: 0
@@ -6372,6 +6369,10 @@ var attributes = {
   fontSize: {
     type: 'number',
     default: 21
+  },
+  colorPicker: {
+    type: 'string',
+    default: ''
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -6422,12 +6423,14 @@ var edit = function edit(_ref) {
       align = attributes.align,
       bold = attributes.bold,
       italic = attributes.italic,
-      fontSize = attributes.fontSize;
+      fontSize = attributes.fontSize,
+      colorPicker = attributes.colorPicker;
   var divStyle = {
     textAlign: align,
     fontWeight: bold,
     fontStyle: italic,
-    fontSize: fontSize
+    fontSize: fontSize,
+    color: colorPicker
   };
 
   function playCounter() {
@@ -6594,6 +6597,28 @@ var edit = function edit(_ref) {
         fontSize: fontSize
       });
     }
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
+    position: "bottom right",
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+          onToggle = _ref2.onToggle;
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        isPrimary: true,
+        onClick: onToggle,
+        "aria-expanded": isOpen
+      }, "Select Text Color");
+    },
+    renderContent: function renderContent() {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
+        color: colorPicker,
+        disableAlpha: true,
+        onChangeComplete: function onChangeComplete(color) {
+          return setAttributes({
+            colorPicker: color.hex
+          });
+        }
+      });
+    }
   }))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["BlockControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["AlignmentToolbar"], {
     value: align,
     onChange: function onChange(align) {
@@ -6711,6 +6736,10 @@ function setCounterStyles(attributes, counterEl) {
 
   if ('inherit' !== attributes.italic) {
     counterEl.style.fontStyle = attributes.italic;
+  }
+
+  if ('' !== attributes.colorPicker) {
+    counterEl.style.color = attributes.colorPicker;
   }
 
   return counterEl;

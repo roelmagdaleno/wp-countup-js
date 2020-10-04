@@ -61,6 +61,10 @@ function setCounterStyles( attributes, counterEl ) {
          counterEl.style.fontStyle = attributes.italic;
     }
 
+    if ( '' !== attributes.colorPicker ) {
+        counterEl.style.color = attributes.colorPicker;
+    }
+
     return counterEl;
 }
 

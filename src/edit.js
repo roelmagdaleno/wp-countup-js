@@ -7,7 +7,9 @@ import {
     Button,
     Toolbar,
     ToolbarButton,
-    FontSizePicker
+    FontSizePicker,
+    ColorPicker,
+    Dropdown
 } from '@wordpress/components';
 
 import {
@@ -37,14 +39,15 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
         easing, separator, decimal,
         prefix, suffix, scroll,
         reset, align, bold, italic,
-        fontSize
+        fontSize, colorPicker
     } = attributes;
 
     const divStyle = {
         textAlign: align,
         fontWeight: bold,
         fontStyle: italic,
-        fontSize: fontSize
+        fontSize: fontSize,
+        color: colorPicker
     };
 
     function playCounter() {
@@ -213,6 +216,24 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { fontSize }
                                     withSlider = { true }
                                     onChange = { ( fontSize ) => setAttributes( { fontSize } ) }
+                                />
+                            </PanelRow>
+
+                            <PanelRow>
+                                <Dropdown
+                                    position = 'bottom right'
+                                    renderToggle = { ( { isOpen, onToggle } ) => (
+                                        <Button isPrimary onClick = { onToggle } aria-expanded = { isOpen }>
+                                            Select Text Color
+                                        </Button>
+                                    ) }
+                                    renderContent = { () => (
+                                        <ColorPicker
+                                            color = { colorPicker }
+                                            disableAlpha = { true }
+                                            onChangeComplete = { ( color ) => setAttributes( { colorPicker: color.hex } ) }
+                                        />
+                                    ) }
                                 />
                             </PanelRow>
                         </PanelBody>
