@@ -14,7 +14,8 @@ import {
 
 import {
     formatBold,
-    formatItalic
+    formatItalic,
+    video
 } from '@wordpress/icons';
 
 import {
@@ -278,6 +279,14 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                             label = 'Italic'
                             onClick = { () => onChangeItalic() }
                             isPressed = { 'inherit' !== italic }
+                        />
+                    </Toolbar>
+
+                    <Toolbar>
+                        <ToolbarButton
+                            icon = { video }
+                            label = 'Play Counter'
+                            onClick = { () => playCounter() }
                         />
                     </Toolbar>
                 </BlockControls>

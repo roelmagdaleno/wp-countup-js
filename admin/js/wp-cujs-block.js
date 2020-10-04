@@ -6668,6 +6668,12 @@ var edit = function edit(_ref) {
       return onChangeItalic();
     },
     isPressed: 'inherit' !== italic
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ToolbarButton"], {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["video"],
+    label: "Play Counter",
+    onClick: function onClick() {
+      return playCounter();
+    }
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "counter",
     "data-end": end,
