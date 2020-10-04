@@ -225,9 +225,15 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                 <Dropdown
                                     position = 'bottom right'
                                     renderToggle = { ( { isOpen, onToggle } ) => (
-                                        <Button isSecondary onClick = { onToggle } aria-expanded = { isOpen }>
-                                            Select Text Color
-                                        </Button>
+                                        <div>
+                                            <Button isLink onClick = { onToggle } aria-expanded = { isOpen } className = 'wp-cujs-block__button'>
+                                                Select Text Color
+                                            </Button>
+
+                                            <Button isSecondary isSmall onClick = { () => setAttributes( { colorPicker: '' } ) }>
+                                                Clear
+                                            </Button>
+                                        </div>
                                     ) }
                                     renderContent = { () => (
                                         <ColorPicker
@@ -243,9 +249,15 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                 <Dropdown
                                     position = 'bottom right'
                                     renderToggle = { ( { isOpen, onToggle } ) => (
-                                        <Button isSecondary onClick = { onToggle } aria-expanded = { isOpen }>
-                                            Select Background Color
-                                        </Button>
+                                        <div>
+                                            <Button isLink onClick = { onToggle } aria-expanded = { isOpen } className = 'wp-cujs-block__button'>
+                                                Select Background Color
+                                            </Button>
+
+                                            <Button isSecondary isSmall onClick = { () => setAttributes( { bgColor: '' } ) }>
+                                                Clear
+                                            </Button>
+                                        </div>
                                     ) }
                                     renderContent = { () => (
                                         <ColorPicker

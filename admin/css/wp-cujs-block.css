@@ -9,3 +9,7 @@
     text-align: center;
     width: 100%;
 }
+
+.wp-cujs-block__button {
+    margin-right: 10px !important;
+}

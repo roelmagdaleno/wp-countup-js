@@ -6608,11 +6608,20 @@ var edit = function edit(_ref) {
     renderToggle: function renderToggle(_ref2) {
       var isOpen = _ref2.isOpen,
           onToggle = _ref2.onToggle;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        isSecondary: true,
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        isLink: true,
         onClick: onToggle,
-        "aria-expanded": isOpen
-      }, "Select Text Color");
+        "aria-expanded": isOpen,
+        className: "wp-cujs-block__button"
+      }, "Select Text Color"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        isSecondary: true,
+        isSmall: true,
+        onClick: function onClick() {
+          return setAttributes({
+            colorPicker: ''
+          });
+        }
+      }, "Clear"));
     },
     renderContent: function renderContent() {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
@@ -6630,11 +6639,20 @@ var edit = function edit(_ref) {
     renderToggle: function renderToggle(_ref3) {
       var isOpen = _ref3.isOpen,
           onToggle = _ref3.onToggle;
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        isSecondary: true,
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        isLink: true,
         onClick: onToggle,
-        "aria-expanded": isOpen
-      }, "Select Background Color");
+        "aria-expanded": isOpen,
+        className: "wp-cujs-block__button"
+      }, "Select Background Color"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        isSecondary: true,
+        isSmall: true,
+        onClick: function onClick() {
+          return setAttributes({
+            bgColor: ''
+          });
+        }
+      }, "Clear"));
     },
     renderContent: function renderContent() {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ColorPicker"], {
