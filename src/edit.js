@@ -5,8 +5,14 @@ import {
     TextControl,
     ToggleControl,
     Button,
-    FontSizePicker
+    Toolbar,
+    ToolbarButton
 } from '@wordpress/components';
+
+import {
+    formatBold,
+    formatItalic
+} from '@wordpress/icons';
 
 import {
     Fragment
@@ -15,14 +21,13 @@ import {
 import {
     InspectorControls,
     BlockControls,
-    BlockAlignmentToolbar, AlignmentToolbar
+    AlignmentToolbar
 } from '@wordpress/block-editor';
 
 import { generateCounterHTML } from './utils';
 
 const edit = ( { attributes, setAttributes, clientId } ) => {
     const {
-        id,
         start,
         end,
         decimals,
@@ -36,18 +41,28 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
         suffix,
         scroll,
         reset,
-        align
+        align,
+        bold,
+        italic
     } = attributes;
 
-    setAttributes( { id: clientId } );
-
     const divStyle = {
-        textAlign: align
+        textAlign: align,
+        fontWeight: bold,
+        fontStyle: italic
     };
 
     function playCounter() {
-        const counterEl = generateCounterHTML( clientId, attributes );
+        const counterEl = generateCounterHTML( attributes, clientId );
         window.WP_CU_JS.startCounter( counterEl );
+    }
+
+    function onChangeBold() {
+        setAttributes( { bold: 'inherit' === bold ? 'bold' : 'inherit' } );
+    }
+
+    function onChangeItalic() {
+        setAttributes( { italic: 'inherit' === italic ? 'italic' : 'inherit' } );
     }
 
     return (
@@ -75,7 +90,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { start }
                                     help = 'Number to start at.'
                                     type = 'number'
-                                    onChange = { ( start ) => setAttributes( { start } ) }
+                                    onChange = { ( start ) => setAttributes( { start: parseInt( start ) } ) }
                                 />
                             </PanelRow>
 
@@ -85,7 +100,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { end }
                                     help = 'The value you want to arrive at.'
                                     type = 'number'
-                                    onChange = { ( end ) => setAttributes( { end } ) }
+                                    onChange = { ( end ) => setAttributes( { end: parseInt( end ) } ) }
                                 />
                             </PanelRow>
 
@@ -95,7 +110,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { duration }
                                     help = 'Animation duration in seconds.'
                                     type = 'number'
-                                    onChange = { ( duration ) => setAttributes( { duration } ) }
+                                    onChange = { ( duration ) => setAttributes( { duration: parseInt( duration ) } ) }
                                 />
                             </PanelRow>
 
@@ -105,7 +120,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { delay }
                                     help = 'Start counter after delay in milliseconds.'
                                     type = 'number'
-                                    onChange = { ( delay ) => setAttributes( { delay } ) }
+                                    onChange = { ( delay ) => setAttributes( { delay: parseInt( delay ) } ) }
                                 />
                             </PanelRow>
                         </PanelBody>
@@ -127,7 +142,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { decimals }
                                     help = 'Number of decimal places.'
                                     type = 'number'
-                                    onChange = { ( decimals ) => setAttributes( { decimals } ) }
+                                    onChange = { ( decimals ) => setAttributes( { decimals: parseInt( decimals ) } ) }
                                 />
                             </PanelRow>
 
@@ -163,7 +178,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     label = 'Group Digits'
                                     help = 'E.j: 1,000 (enabled) or 1000 (disabled).'
                                     checked = { grouping }
-                                    onChange = { ( value ) => setAttributes( { grouping: value } ) }
+                                    onChange = { ( grouping ) => setAttributes( { grouping } ) }
                                 />
                             </PanelRow>
 
@@ -171,7 +186,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                 <ToggleControl
                                     label = 'Ease Animation'
                                     checked = { easing }
-                                    onChange = { ( value ) => setAttributes( { easing: value } ) }
+                                    onChange = { ( easing ) => setAttributes( { easing } ) }
                                 />
                             </PanelRow>
 
@@ -180,7 +195,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     label = 'Start on View'
                                     help = 'Start the counter on view.'
                                     checked = { scroll }
-                                    onChange = { ( value ) => setAttributes( { scroll: value } ) }
+                                    onChange = { ( scroll ) => setAttributes( { scroll } ) }
                                 />
                             </PanelRow>
 
@@ -189,7 +204,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     label = 'Reset after View'
                                     help = 'Reset the counter after view.'
                                     checked = { reset }
-                                    onChange = { ( value ) => setAttributes( { reset: value } ) }
+                                    onChange = { ( reset ) => setAttributes( { reset } ) }
                                 />
                             </PanelRow>
                         </PanelBody>
@@ -201,13 +216,29 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                         value = { align }
                         onChange = { ( align ) => setAttributes( { align } ) }
                     />
+
+                    <Toolbar>
+                        <ToolbarButton
+                            icon = { formatBold }
+                            label = 'Bold'
+                            onClick = { () => onChangeBold() }
+                            isPressed = { 'inherit' !== bold }
+                        />
+
+                        <ToolbarButton
+                            icon = { formatItalic }
+                            label = 'Italic'
+                            onClick = { () => onChangeItalic() }
+                            isPressed = { 'inherit' !== italic }
+                        />
+                    </Toolbar>
                 </BlockControls>
 
                 <div className="counter"
                      data-end = { end }
                      style = { divStyle }
                 >
-                    { end }
+                    { start }
                 </div>
             </Fragment>
         </>

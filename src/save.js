@@ -5,12 +5,10 @@ import {
 import { generateCounterHTML } from "./utils";
 
 const save = ( { attributes } ) => {
-    const counterEl = generateCounterHTML( attributes.id, attributes );
+    const counterEl = generateCounterHTML( attributes, attributes.id );
 
-    return counterEl && (
-        <RawHTML>
-            { counterEl.outerHTML }
-        </RawHTML>
+    return (
+        <RawHTML>{ counterEl.outerHTML }</RawHTML>
     );
 };
 

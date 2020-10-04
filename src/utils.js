@@ -1,47 +1,63 @@
-export function generateCounterHTML( clientId, attributes ) {
-    const {
-        start,
-        end,
-        decimals,
-        duration,
-        delay,
-        grouping,
-        easing,
-        separator,
-        decimal,
-        prefix,
-        suffix,
-        scroll,
-        reset,
-        align
-    } = attributes;
+function constructCounter( attributes ) {
+    let counterEl = document.createElement( 'div' );
 
+    counterEl = setCounterDataset( attributes, counterEl )
+    counterEl = setCounterStyles( attributes, counterEl );
+
+    counterEl.innerHTML = attributes.start;
+    counterEl.classList.add( 'counter' );
+
+    return counterEl;
+}
+
+function setCounterDataset( attributes, counterEl ) {
+    const settings = [
+        'start', 'duration', 'delay',
+        'decimal', 'decimals', 'separator',
+        'suffix', 'prefix', 'grouping', 'easing',
+        'scroll', 'reset', 'end'
+    ];
+
+    for ( let i = 0; i < settings.length; i++ ) {
+        let setting = settings[ i ];
+        counterEl.dataset[ setting ] = attributes[ setting ];
+    }
+
+    return counterEl;
+}
+
+function setCounterStyles( attributes, counterEl ) {
+    counterEl.style.textAlign = attributes.align;
+
+    if ( 'inherit' !== attributes.bold ) {
+        counterEl.style.fontWeight = attributes.bold;
+    }
+
+    if ( 'inherit' !== attributes.italic ) {
+         counterEl.style.fontStyle = attributes.italic;
+    }
+
+    return counterEl;
+}
+
+export function generateCounterHTML( attributes, clientId ) {
     const container = document.getElementById( `block-${ clientId }` );
 
     if ( ! container ) {
-        return;
+        return constructCounter( attributes );
     }
 
-    const counterEl = container.querySelector( '.counter' );
+    let counterEl = container.querySelector( '.counter' );
 
     if ( ! counterEl ) {
-        return;
+        return false;
     }
 
-    counterEl.dataset.start     = start;
-    counterEl.dataset.duration  = duration;
-    counterEl.dataset.delay     = delay;
-    counterEl.dataset.decimal   = decimal;
-    counterEl.dataset.decimals  = decimals;
-    counterEl.dataset.separator = separator;
-    counterEl.dataset.suffix    = suffix;
-    counterEl.dataset.prefix    = prefix;
-    counterEl.dataset.grouping  = grouping;
-    counterEl.dataset.easing    = easing;
-    counterEl.dataset.scroll    = scroll;
-    counterEl.dataset.reset     = reset;
-    counterEl.dataset.end       = end;
-    counterEl.style.textAlign   = align;
+    counterEl = setCounterDataset( attributes, counterEl )
+    counterEl = setCounterStyles( attributes, counterEl );
+
+    delete counterEl.dataset.observed;
+    counterEl.innerHTML = attributes.start;
 
     return counterEl;
 }

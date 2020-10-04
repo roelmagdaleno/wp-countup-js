@@ -13,8 +13,9 @@ const attributes = {
     decimal:   { type: 'string', default: WP_CU_JS.pluginSettings.decimal },
     prefix:    { type: 'string', default: WP_CU_JS.pluginSettings.prefix },
     suffix:    { type: 'string', default: WP_CU_JS.pluginSettings.suffix },
-    content:   { type: 'string', source: 'html', selector: '.counter' },
-    align:     { type: 'string', default: 'center' }
+    align:     { type: 'string', default: 'center' },
+    bold:      { type: 'string', default: 'inherit' },
+    italic:    { type: 'string', default: 'inherit' }
 };
 
 export default attributes;
