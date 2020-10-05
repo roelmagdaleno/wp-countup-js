@@ -22,17 +22,17 @@ window.WP_CU_JS.startCounter = ( counterEl ) => WP_CUPJS_startCounter( counterEl
  */
 function WP_CUPJS_startCounterOnScroll( entries, observer ) {
     for ( let i = 0; i < entries.length; i++ ) {
-        const entry = entries[i];
-
-        if ( ! entry.isIntersecting ) {
-            continue;
-        }
-
+        const entry        = entries[i];
         const counterEl    = entry.target;
         const dataset      = counterEl.dataset;
         const observed     = dataset.hasOwnProperty( 'observed' );
         const onScroll     = dataset.hasOwnProperty( 'scroll' ) && 'true' === dataset.scroll;
         const resetCounter = WP_CUPJS_shouldResetCounter( dataset );
+
+        if ( ! entry.isIntersecting ) {
+            WP_CUPJS_maybeResetCounter( onScroll, resetCounter, observed, counterEl );
+            continue;
+        }
 
         // If counter starts on scroll and need reset.
         if ( onScroll && resetCounter && observed ) {
@@ -106,6 +106,22 @@ function WP_CUPJS_getSuffix( counterId, suffix ) {
     }
 
     return `<span class="wp_cup_suffix" id="suffix-${ counterId }">${ suffix }</span>`;
+}
+
+/**
+ * Check if current counter should reset or not.
+ *
+ * @since 4.2.0
+ *
+ * @param {boolean}      onScroll       Whether counter should start on view.
+ * @param {boolean}      resetCounter   Whether to reset counter or not.
+ * @param {boolean}      observed       Whether counter is being observed.
+ * @param {HTMLElement}  counterEl      The counter element.
+ */
+function WP_CUPJS_maybeResetCounter( onScroll, resetCounter, observed, counterEl ) {
+    if ( onScroll && resetCounter && observed ) {
+        WP_CUPJS_resetCounter( counterEl );
+    }
 }
 
 /**
