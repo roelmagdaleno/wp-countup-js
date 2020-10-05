@@ -65,17 +65,17 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 			}
 
 			$valid_attributes = array(
-				'start',
 				'decimals',
+				'delay',
 				'duration',
-				'scroll',
-				'reset',
 				'easing',
 				'grouping',
-				'separator',
 				'prefix',
+				'reset',
+				'scroll',
+				'separator',
+				'start',
 				'suffix',
-				'delay',
 			);
 
 			// The HTML counter.

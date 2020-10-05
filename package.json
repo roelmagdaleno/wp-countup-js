@@ -1,7 +1,7 @@
 {
   "name": "wp-countup-js",
   "version": "4.1.0",
-  "description": "Create animated incremental numerical counters and display it into your site.",
+  "description": "Display multiple animated counters into your WordPress site.",
   "main": "index.js",
   "scripts": {
     "minify": "terser assets/js/wp-countup-show-counter.js --compress --mangle --output assets/js/wp-countup-show-counter.min.js",

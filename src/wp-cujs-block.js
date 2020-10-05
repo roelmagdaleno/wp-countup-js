@@ -5,7 +5,7 @@ import attributes from './attributes';
 
 registerBlockType( 'roelmagdaleno/wp-countup-js', {
     title: 'CountUp',
-    description: 'Create animated incremental numerical counters and display it into your site.',
+    description: 'Display multiple animated counters into your WordPress site.',
     category: 'common',
     icon: 'editor-ol',
     keywords: [ 'counter', 'countup', 'animate' ],
