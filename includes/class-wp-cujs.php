@@ -114,11 +114,13 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 				$in_footer
 			);
 
-			wp_localize_script( 'wp-countup-js-plugin', 'WP_CU_JS', array(
+			$args = array(
 				'resetCounterWhenViewAgain' => isset( $this->settings['reset_counter_when_view_again'] ),
 				'endInsideShortcode'        => isset( $this->settings['end_inside_shortcode'] ),
 				'pluginSettings'            => $plugin_settings,
-			) );
+			);
+
+			wp_localize_script( 'wp-countup-js-plugin', 'WP_CU_JS', $args );
 		}
 
 		/**
