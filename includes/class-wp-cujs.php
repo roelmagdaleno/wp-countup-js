@@ -111,7 +111,24 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 				return;
 			}
 
-			$in_footer       = true;
+			wp_enqueue_script(
+				'wp-countup-js-plugin',
+				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
+				null,
+				WP_COUNTUP_JS_VERSION,
+				true
+			);
+
+			$this->localize();
+		}
+
+		/**
+		 * Localize the required attributes for JavaScript in frontend.
+		 * Those attributes will be used for our JS file to start its functionality.
+		 *
+		 * @since 4.2.2
+		 */
+		public function localize() {
 			$plugin_settings = array(
 				'useEasing'   => isset( $this->settings['use_easing'] ),
 				'useGrouping' => isset( $this->settings['use_grouping'] ),
@@ -119,23 +136,6 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 				'decimal'     => $this->settings['use_decimal'],
 				'prefix'      => $this->settings['use_prefix'],
 				'suffix'      => $this->settings['use_sufix'],
-			);
-
-			/**
-			 * We're only enqueuing this script because already contains
-			 * the countUp.min.js file as import module.
-			 *
-			 * We were enqueueing the countUp.min.js script before but it
-			 * was loading twice in the website.
-			 *
-			 * @since 4.1.0
-			 */
-			wp_enqueue_script(
-				'wp-countup-js-plugin',
-				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
-				null,
-				WP_COUNTUP_JS_VERSION,
-				$in_footer
 			);
 
 			$args = array(
@@ -164,10 +164,6 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 
 			if ( ! $post ) {
 				return false;
-			}
-
-			if ( has_shortcode( $post->post_content, 'countup' ) ) {
-				return true;
 			}
 
 			return has_block( WP_COUNTUP_JS_GUTENBERG_NAMESPACE, $post->post_content );

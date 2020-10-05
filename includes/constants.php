@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 0.1.0
  */
-define( 'WP_COUNTUP_JS_VERSION', '4.2.1' );
+define( 'WP_COUNTUP_JS_VERSION', '4.2.2' );
 
 /**
  * The plugin path directory.

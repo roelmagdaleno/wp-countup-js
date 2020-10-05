@@ -4,7 +4,7 @@ Donate link: https://paypal.me/roelmagdaleno
 Tags: WP CountUP JS, CountUP, CountUP JS, counters, animated
 Requires at least: 5.0
 Tested up to: 5.5.1
-Stable tag: 4.2.1
+Stable tag: 4.2.2
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -89,6 +89,9 @@ Inside of the settings page, you can find the next settings:
 
 == Upgrade Notice ==
 
+= 4.2.2 =
+* FIX: JavaScript file wasn't loading properly in some posts and pages for shortcodes.
+
 = 4.2.1 =
 * FIX: Main script was loading as type JavaScript instead of Module.
 
@@ -107,6 +110,9 @@ Inside of the settings page, you can find the next settings:
 * The core plugin was updated to 1.9.3 version.
 
 == Changelog ==
+
+= 4.2.2 =
+* FIX: JavaScript file wasn't loading properly in some posts and pages for shortcodes.
 
 = 4.2.1 =
 * FIX: Main script was loading as type JavaScript instead of Module.

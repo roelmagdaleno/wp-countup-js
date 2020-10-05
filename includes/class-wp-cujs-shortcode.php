@@ -39,6 +39,16 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 				return '';
 			}
 
+			wp_enqueue_script(
+				'wp-countup-js-plugin',
+				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
+				null,
+				WP_COUNTUP_JS_VERSION,
+				true
+			);
+
+			WP_CUJS::get_instance()->localize();
+
 			$valid_attributes = array(
 				'decimals',
 				'delay',
