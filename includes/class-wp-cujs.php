@@ -59,6 +59,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 			$this->settings = get_option( WP_COUNTUP_JS_OPTION_NAME, array() );
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			add_filter( 'script_loader_tag', array( $this, 'add_module_attribute' ), 10, 3 );
 
 			new WP_CUJS_Shortcode();
 			new WP_CUJS_Gutenberg_Block();
@@ -71,6 +72,29 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 			add_filter( 'network_admin_plugin_action_links', array( $this, 'add_settings_action_link' ), 10, 2 );
 
 			new WP_CUJS_Options();
+		}
+
+		/**
+		 * The countUp.min.js file (2.0.4) is exported as a ES6 module
+		 * that's why we need to add the module attribute in the script and
+		 * the same for our own script.
+		 *
+		 * @since  4.1.0
+		 *
+		 * @param  string   $tag      The current script tag to render in HTML.
+		 * @param  string   $handle   The current handle script name.
+		 * @return string             The script tag with module type.
+		 */
+		public function add_module_attribute( $tag, $handle, $src ) {
+			$valid_handles = array(
+				'wp-countup-js-plugin',
+			);
+
+			if ( ! in_array( $handle, $valid_handles, true ) ) {
+				return $tag;
+			}
+
+			return '<script type="module" src="' . esc_attr( $src ) . '"></script>'; // phpcs:ignore
 		}
 
 		/**
@@ -109,7 +133,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 			wp_enqueue_script(
 				'wp-countup-js-plugin',
 				WP_COUNTUP_JS_URL . 'assets/js/wp-countup-show-counter.min.js',
-				array( 'jquery' ),
+				null,
 				WP_COUNTUP_JS_VERSION,
 				$in_footer
 			);

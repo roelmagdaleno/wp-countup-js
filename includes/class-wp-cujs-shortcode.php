@@ -18,32 +18,7 @@ if ( ! class_exists( 'WP_CUJS_Shortcode' ) ) {
 		 * @since  4.0.0
 		 */
 		public function __construct() {
-			add_filter( 'script_loader_tag', array( $this, 'add_module_attribute' ), 10, 2 );
 			add_shortcode( 'countup', array( $this, 'show_counter' ) );
-		}
-
-		/**
-		 * The countUp.min.js file (2.0.4) is exported as a ES6 module
-		 * that's why we need to add the module attribute in the script and
-		 * the same for our own script.
-		 *
-		 * @since  4.1.0
-		 *
-		 * @param  string   $tag      The current script tag to render in HTML.
-		 * @param  string   $handle   The current handle script name.
-		 * @return string             The script tag with module type.
-		 */
-		public function add_module_attribute( $tag, $handle ) {
-			$valid_handles = array(
-				'countUp.min.js',
-				'wp-countup-js-plugin',
-			);
-
-			if ( ! in_array( $handle, $valid_handles, true ) ) {
-				return $tag;
-			}
-
-			return str_replace( ' src', ' type="module" src', $tag );
 		}
 
 		/**

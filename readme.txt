@@ -4,7 +4,7 @@ Donate link: https://paypal.me/roelmagdaleno
 Tags: WP CountUP JS, CountUP, CountUP JS, counters, animated
 Requires at least: 5.0
 Tested up to: 5.5.1
-Stable tag: 4.2.0
+Stable tag: 4.2.1
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -89,6 +89,9 @@ Inside of the settings page, you can find the next settings:
 
 == Upgrade Notice ==
 
+= 4.2.1 =
+* FIX: Main script was loading as type JavaScript instead of Module.
+
 = 4.2.0 =
 * Compatible with Gutenberg. Now the plugin has its own Gutenberg Block.
 
@@ -102,36 +105,12 @@ Inside of the settings page, you can find the next settings:
 = 4.0 =
 * The whole plugin is using OOP style.
 * The core plugin was updated to 1.9.3 version.
-
-= 3.1 =
-* Bug fixed where the plugin was initializing at the same time that other plugins, breaking them.
-
-= 3.0 =
-* Bug fixed where some counters didn't start after scroll into it.
-* You can use two ways to use the shortcode.
-
-= 2.3 =
-* Bug fixed where counter at the top starts counters at bottom.
-* Now, every counter works independently.
-
-= 2.2 =
-* Now you can add an option if you wanna start the counter when the page is loaded or when scroll it.
-
-= 2.1 =
-* All counters starts their animations before to reach the target counter.
-* Now, when you scroll to the target counter, the counter will start its animation.
-
-= 2.0 =
-* Now you can add the options from CountUP.js Options Page inside of the shortcode.
-
-= 1.1 =
-* jQuery issue was solved.
-
-= 1.0 =
-* Release
 
 == Changelog ==
 
+= 4.2.1 =
+* FIX: Main script was loading as type JavaScript instead of Module.
+
 = 4.2.0 =
 * Compatible with Gutenberg. Now the plugin has its own Gutenberg Block.
 
@@ -145,30 +124,3 @@ Inside of the settings page, you can find the next settings:
 = 4.0 =
 * The whole plugin is using OOP style.
 * The core plugin was updated to 1.9.3 version.
-
-= 3.1 =
-* Bug fixed where the plugin was initializing at the same time that other plugins, breaking them.
-
-= 3.0 =
-* Bug fixed where some counters didn't start after scroll into it.
-* You can use two ways to use the shortcode.
-
-= 2.3 =
-* Bug fixed where counter at the top starts counters at bottom.
-* Now, every counter works independently.
-
-= 2.2 =
-* Now you can add an option if you wanna start the counter when the page is loaded or when scroll it.
-
-= 2.1 =
-* All counters starts their animations before to reach the target counter.
-* Now, when you scroll to the target counter, the counter will start its animation.
-
-= 2.0 =
-* Now you can add the options from CountUP.js Options Page inside of the shortcode.
-
-= 1.1 =
-* jQuery issue was solved.
-
-= 1.0 =
-* Release
