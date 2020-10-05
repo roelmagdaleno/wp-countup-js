@@ -6302,15 +6302,31 @@ var wordpress = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createEl
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var attributes = {
-  start: {
-    type: 'number',
-    default: 0
+  align: {
+    type: 'string',
+    default: 'center'
   },
-  end: {
-    type: 'number',
-    default: 0
+  bgColor: {
+    type: 'string',
+    default: ''
+  },
+  bold: {
+    type: 'string',
+    default: 'inherit'
+  },
+  colorPicker: {
+    type: 'string',
+    default: ''
+  },
+  decimal: {
+    type: 'string',
+    default: WP_CU_JS.pluginSettings.decimal
   },
   decimals: {
+    type: 'number',
+    default: 0
+  },
+  delay: {
     type: 'number',
     default: 0
   },
@@ -6318,65 +6334,49 @@ var attributes = {
     type: 'number',
     default: 2
   },
-  delay: {
-    type: 'number',
-    default: 0
-  },
-  grouping: {
-    type: 'boolean',
-    default: !!WP_CU_JS.pluginSettings.useGrouping
-  },
   easing: {
     type: 'boolean',
     default: !!WP_CU_JS.pluginSettings.useEasing
   },
-  scroll: {
-    type: 'boolean',
-    default: false
-  },
-  reset: {
-    type: 'boolean',
-    default: !!WP_CU_JS.resetCounterWhenViewAgain
-  },
-  separator: {
-    type: 'string',
-    default: WP_CU_JS.pluginSettings.separator
-  },
-  decimal: {
-    type: 'string',
-    default: WP_CU_JS.pluginSettings.decimal
-  },
-  prefix: {
-    type: 'string',
-    default: WP_CU_JS.pluginSettings.prefix
-  },
-  suffix: {
-    type: 'string',
-    default: WP_CU_JS.pluginSettings.suffix
-  },
-  align: {
-    type: 'string',
-    default: 'center'
-  },
-  bold: {
-    type: 'string',
-    default: 'inherit'
-  },
-  italic: {
-    type: 'string',
-    default: 'inherit'
+  end: {
+    type: 'number',
+    default: 0
   },
   fontSize: {
     type: 'number',
     default: 21
   },
-  colorPicker: {
-    type: 'string',
-    default: ''
+  grouping: {
+    type: 'boolean',
+    default: !!WP_CU_JS.pluginSettings.useGrouping
   },
-  bgColor: {
+  italic: {
     type: 'string',
-    default: ''
+    default: 'inherit'
+  },
+  prefix: {
+    type: 'string',
+    default: WP_CU_JS.pluginSettings.prefix
+  },
+  reset: {
+    type: 'boolean',
+    default: !!WP_CU_JS.resetCounterWhenViewAgain
+  },
+  scroll: {
+    type: 'boolean',
+    default: false
+  },
+  separator: {
+    type: 'string',
+    default: WP_CU_JS.pluginSettings.separator
+  },
+  start: {
+    type: 'number',
+    default: 0
+  },
+  suffix: {
+    type: 'string',
+    default: WP_CU_JS.pluginSettings.suffix
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -6729,6 +6729,101 @@ var save = function save(_ref) {
 
 /***/ }),
 
+/***/ "./src/transforms.js":
+/*!***************************!*\
+  !*** ./src/transforms.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var transforms = {
+  from: [{
+    type: 'shortcode',
+    tag: 'countup',
+    attributes: {
+      decimals: {
+        type: 'number',
+        shortcode: function shortcode(attributes) {
+          return parseInt(attributes.named.decimals);
+        }
+      },
+      delay: {
+        type: 'number',
+        shortcode: function shortcode(attributes) {
+          var delay = parseInt(attributes.named.delay);
+          return isNaN(delay) ? 0 : delay;
+        }
+      },
+      duration: {
+        type: 'number',
+        shortcode: function shortcode(attributes) {
+          var duration = parseInt(attributes.named.duration);
+          return isNaN(duration) ? 2 : duration;
+        }
+      },
+      easing: {
+        type: 'boolean',
+        shortcode: function shortcode(attributes) {
+          return attributes.named.easing === 'true';
+        }
+      },
+      end: {
+        type: 'number',
+        shortcode: function shortcode(attributes) {
+          return parseInt(attributes.named.end);
+        }
+      },
+      grouping: {
+        type: 'boolean',
+        shortcode: function shortcode(attributes) {
+          return attributes.named.grouping === 'true';
+        }
+      },
+      prefix: {
+        type: 'string',
+        shortcode: function shortcode(attributes) {
+          return attributes.named.prefix;
+        }
+      },
+      reset: {
+        type: 'boolean',
+        shortcode: function shortcode(attributes) {
+          return attributes.named.reset === 'true';
+        }
+      },
+      scroll: {
+        type: 'boolean',
+        shortcode: function shortcode(attributes) {
+          return attributes.named.scroll === 'true';
+        }
+      },
+      separator: {
+        type: 'string',
+        shortcode: function shortcode(attributes) {
+          return attributes.named.separator;
+        }
+      },
+      start: {
+        type: 'number',
+        shortcode: function shortcode(attributes) {
+          return parseInt(attributes.named.start);
+        }
+      },
+      suffix: {
+        type: 'string',
+        shortcode: function shortcode(attributes) {
+          return parseInt(attributes.named.suffix);
+        }
+      }
+    }
+  }]
+};
+/* harmony default export */ __webpack_exports__["default"] = (transforms);
+
+/***/ }),
+
 /***/ "./src/utils.js":
 /*!**********************!*\
   !*** ./src/utils.js ***!
@@ -6837,6 +6932,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
+/* harmony import */ var _transforms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./transforms */ "./src/transforms.js");
+
 
 
 
@@ -6848,6 +6945,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])('roe
   icon: 'editor-ol',
   keywords: ['counter', 'countup', 'animate'],
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_3__["default"],
+  transforms: _transforms__WEBPACK_IMPORTED_MODULE_4__["default"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_2__["default"]
 });

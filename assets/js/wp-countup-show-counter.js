@@ -211,7 +211,7 @@ function WP_CUPJS_getOptions( counterEl ) {
     }
 
     if ( dataset.hasOwnProperty( 'duration' ) ) {
-        options.duration = dataset.duration;
+        options.duration = isNaN( dataset.duration ) ? 2 : dataset.duration;
     }
 
     if ( dataset.hasOwnProperty( 'grouping' ) ) {
