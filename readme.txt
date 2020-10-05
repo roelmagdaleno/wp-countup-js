@@ -37,7 +37,21 @@ The second way. To use this format you need to check the **_Use the end number i
 
 `[countup start="the-start-number" decimals="your-value" duration="your-value"]the-end-number[/countup]`
 
-The shortcode accepts the next arguments:
+### Example
+
+You can use the shortcode in two ways, as mentioned before. If you are using the first way:
+
+`[countup start="0" end="55" decimals="2" duration="5" prefix="my_prefix" scroll="false"]`
+
+If you are using the second way (remember to check the **_Use the end number inside the shortcode?_**):
+
+`[countup start="0" decimals="2" duration="5"]55[/countup]`
+
+Copy and paste any example in one of your posts and test.
+
+## Available Attributes
+
+The shortcode and Gutenberg block accepts the next arguments:
 
 - decimals - Puts the desired decimals into your counter.
 - delay - Set a delay in milliseconds to start the counter.
@@ -51,18 +65,6 @@ The shortcode accepts the next arguments:
 - separator - You can use a separator (default is comma).
 - start - A number to start the counter.
 - suffix - A text as counter suffix.
-
-### Example
-
-You can use the shortcode in two ways, as mentioned before. If you are using the first way:
-
-`[countup start="0" end="55" decimals="2" duration="5" prefix="my_prefix" scroll="false"]`
-
-If you are using the second way (remember to check the **_Use the end number inside the shortcode?_**):
-
-`[countup start="0" decimals="2" duration="5"]55[/countup]`
-
-Copy and paste any example in one of your posts and test.
 
 ## Settings
 
