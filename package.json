@@ -1,6 +1,6 @@
 {
   "name": "wp-countup-js",
-  "version": "4.2.1",
+  "version": "4.2.3",
   "description": "Display multiple animated counters into your WordPress site.",
   "main": "index.js",
   "scripts": {

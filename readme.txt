@@ -4,7 +4,7 @@ Donate link: https://paypal.me/roelmagdaleno
 Tags: WP CountUP JS, CountUP, CountUP JS, counters, animated
 Requires at least: 5.0
 Tested up to: 5.5.1
-Stable tag: 4.2.2
+Stable tag: 4.2.3
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -89,6 +89,9 @@ Inside of the settings page, you can find the next settings:
 
 == Upgrade Notice ==
 
+= 4.2.3 =
+* FIX: Decimal counters shows as integers instead of floats.
+
 = 4.2.2 =
 * FIX: JavaScript file wasn't loading properly in some posts and pages for shortcodes.
 
@@ -97,20 +100,12 @@ Inside of the settings page, you can find the next settings:
 
 = 4.2.0 =
 * Compatible with Gutenberg. Now the plugin has its own Gutenberg Block.
-
-= 4.0.2 =
-* Now you can execute a shortcode (that returns a number) inside the counter shortcode.
-
-= 4.0.1 =
-* Bug fixed where uBlock browser extension was blocking the "showCounter.js" file.
-* "showCounter.js" file renamed to "wp-countup-show-counter.js" due to the previous bug.
-
-= 4.0 =
-* The whole plugin is using OOP style.
-* The core plugin was updated to 1.9.3 version.
 
 == Changelog ==
 
+= 4.2.3 =
+* FIX: Decimal counters shows as integers instead of floats.
+
 = 4.2.2 =
 * FIX: JavaScript file wasn't loading properly in some posts and pages for shortcodes.
 
@@ -119,14 +114,3 @@ Inside of the settings page, you can find the next settings:
 
 = 4.2.0 =
 * Compatible with Gutenberg. Now the plugin has its own Gutenberg Block.
-
-= 4.0.2 =
-* Now you can execute a shortcode (that returns a number) inside the counter shortcode.
-
-= 4.0.1 =
-* Bug fixed where uBlock browser extension was blocking the "showCounter.js" file.
-* "showCounter.js" file renamed to "wp-countup-show-counter.js" due to the previous bug.
-
-= 4.0 =
-* The whole plugin is using OOP style.
-* The core plugin was updated to 1.9.3 version.

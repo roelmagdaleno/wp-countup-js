@@ -6475,7 +6475,7 @@ var edit = function edit(_ref) {
     type: "number",
     onChange: function onChange(start) {
       return setAttributes({
-        start: parseInt(start)
+        start: parseFloat(start)
       });
     }
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
@@ -6485,7 +6485,7 @@ var edit = function edit(_ref) {
     type: "number",
     onChange: function onChange(end) {
       return setAttributes({
-        end: parseInt(end)
+        end: parseFloat(end)
       });
     }
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
@@ -6694,6 +6694,16 @@ var edit = function edit(_ref) {
     }
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "counter",
+    "data-start": start,
+    "data-duration": duration,
+    "data-delay": delay,
+    "data-decimal": decimal,
+    "data-decimals": decimals,
+    "data-separator": separator,
+    "data-suffix": suffix,
+    "data-prefix": prefix,
+    "data-grouping": grouping,
+    "data-easing": easing,
     "data-end": end,
     style: divStyle
   }, start)));
@@ -6772,7 +6782,7 @@ var transforms = {
       end: {
         type: 'number',
         shortcode: function shortcode(attributes) {
-          return parseInt(attributes.named.end);
+          return parseFloat(attributes.named.end);
         }
       },
       grouping: {
@@ -6808,7 +6818,7 @@ var transforms = {
       start: {
         type: 'number',
         shortcode: function shortcode(attributes) {
-          return parseInt(attributes.named.start);
+          return parseFloat(attributes.named.start);
         }
       },
       suffix: {

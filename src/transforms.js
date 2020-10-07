@@ -28,7 +28,7 @@ const transforms = {
                 },
                 end: {
                     type: 'number',
-                    shortcode: ( attributes ) => parseInt( attributes.named.end )
+                    shortcode: ( attributes ) => parseFloat( attributes.named.end )
                 },
                 grouping: {
                     type: 'boolean',
@@ -52,7 +52,7 @@ const transforms = {
                 },
                 start: {
                     type: 'number',
-                    shortcode: ( attributes ) => parseInt( attributes.named.start )
+                    shortcode: ( attributes ) => parseFloat( attributes.named.start )
                 },
                 suffix: {
                     type: 'string',

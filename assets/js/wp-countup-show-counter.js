@@ -183,7 +183,7 @@ function WP_CUPJS_runObserver( counterEl ) {
  */
 function WP_CUPJS_startCounter( counterEl, isObserved = true ) {
     let endVal  = counterEl.dataset.end;
-    let countUp = new CountUp( counterEl, parseInt( endVal ), WP_CUPJS_getOptions( counterEl ) );
+    let countUp = new CountUp( counterEl, parseFloat( endVal ), WP_CUPJS_getOptions( counterEl ) );
     const delay = parseInt( counterEl.dataset.delay );
 
     if ( isObserved ) {
@@ -219,7 +219,7 @@ function WP_CUPJS_getOptions( counterEl ) {
     };
 
     if ( dataset.hasOwnProperty( 'start' ) ) {
-        options.startVal = dataset.start;
+        options.startVal = parseFloat( dataset.start );
     }
 
     if ( dataset.hasOwnProperty( 'decimals' ) ) {

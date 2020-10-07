@@ -90,7 +90,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { start }
                                     help = 'Number to start at.'
                                     type = 'number'
-                                    onChange = { ( start ) => setAttributes( { start: parseInt( start ) } ) }
+                                    onChange = { ( start ) => setAttributes( { start: parseFloat( start ) } ) }
                                 />
                             </PanelRow>
 
@@ -100,7 +100,7 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                                     value = { end }
                                     help = 'The value you want to arrive at.'
                                     type = 'number'
-                                    onChange = { ( end ) => setAttributes( { end: parseInt( end ) } ) }
+                                    onChange = { ( end ) => setAttributes( { end: parseFloat( end ) } ) }
                                 />
                             </PanelRow>
 
@@ -304,6 +304,16 @@ const edit = ( { attributes, setAttributes, clientId } ) => {
                 </BlockControls>
 
                 <div className="counter"
+                     data-start = { start }
+                     data-duration = { duration }
+                     data-delay = { delay }
+                     data-decimal = { decimal }
+                     data-decimals = { decimals }
+                     data-separator = { separator }
+                     data-suffix = { suffix }
+                     data-prefix = { prefix }
+                     data-grouping = { grouping }
+                     data-easing = { easing }
                      data-end = { end }
                      style = { divStyle }
                 >
