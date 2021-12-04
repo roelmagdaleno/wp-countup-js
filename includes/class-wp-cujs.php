@@ -75,7 +75,7 @@ if ( ! class_exists( 'WP_CUJS' ) ) {
 		}
 
 		/**
-		 * The countUp.min.js file (2.0.4) is exported as a ES6 module
+		 * The countUp.min.js file (2.0.8) is exported as a ES6 module
 		 * that's why we need to add the module attribute in the script and
 		 * the same for our own script.
 		 *

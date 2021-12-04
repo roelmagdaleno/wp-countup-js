@@ -34,6 +34,7 @@ if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
 		 * Enqueue the scripts in the post block editor.
 		 *
 		 * @since 4.1.0
+		 * @since 4.2.4 Remove Gutenberg dependencies, those aren't needed anymore.
 		 */
 		public function enqueue_editor_block_assets() {
 			$in_footer = true;
@@ -49,7 +50,7 @@ if ( ! class_exists( 'WP_CUJS_Gutenberg_Block' ) ) {
 			wp_enqueue_script(
 				self::SCRIPT_HANDLE,
 				plugins_url( 'admin/js/wp-cujs-block.js', __DIR__ ),
-				array( 'wp-blocks', 'wp-editor', 'wp-element' ),
+				null,
 				WP_COUNTUP_JS_VERSION,
 				$in_footer
 			);

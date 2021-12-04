@@ -1,13 +1,14 @@
 <?php
 
 /*
-Plugin Name: WP CountUP JS
-Plugin URI:  https://github.com/roelmagdaleno/wp-countup-js
-Description: Display multiple animated counters into your WordPress site.
-Version:     4.2.3
-Author:      Roel Magdaleno
-Author URI:  https://roelmagdaleno.com
-License:     GPLv3
+Plugin Name:       WP CountUP JS
+Plugin URI:        https://github.com/roelmagdaleno/wp-countup-js
+Description:       Display multiple animated counters into your WordPress site.
+Version:           4.2.4
+Requires at least: 5.7.4
+Author:            Roel Magdaleno
+Author URI:        https://roelmagdaleno.com
+License:           GPLv3
 */
 
 if ( ! defined( 'ABSPATH' ) ) {

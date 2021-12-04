@@ -2,9 +2,9 @@
 Contributors: rokumetal
 Donate link: https://paypal.me/roelmagdaleno
 Tags: WP CountUP JS, CountUP, CountUP JS, counters, animated
-Requires at least: 5.0
-Tested up to: 5.5.1
-Stable tag: 4.2.3
+Requires at least: 5.7.4
+Tested up to: 5.8.2
+Stable tag: 4.2.4
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -89,6 +89,9 @@ Inside of the settings page, you can find the next settings:
 
 == Upgrade Notice ==
 
+= 4.2.4 =
+* IMPROVE: Remove Gutenberg dependencies, those aren't needed anymore.
+
 = 4.2.3 =
 * FIX: Decimal counters shows as integers instead of floats.
 
@@ -102,6 +105,9 @@ Inside of the settings page, you can find the next settings:
 * Compatible with Gutenberg. Now the plugin has its own Gutenberg Block.
 
 == Changelog ==
+
+= 4.2.4 =
+* IMPROVE: Remove Gutenberg dependencies, those aren't needed anymore.
 
 = 4.2.3 =
 * FIX: Decimal counters shows as integers instead of floats.
